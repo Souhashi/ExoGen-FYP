@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class Shuffle : MonoBehaviour
 {
-
+    //We need to make this better!
     public Map map;
     private Room room1, room2;
     private List<Vector3Int> places = new List<Vector3Int>();
