@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40916dd72efa37418841772d05de92f, type: 3}
+  m_Name: RoomPallete1
+  m_EditorClassIdentifier: 
+  bckg: {fileID: 11400000, guid: 8e0ee198a7ae86e4aa39ac75a52555cf, type: 2}
+  wallL: {fileID: 11400000, guid: 3b9cc6c383bafbe41948ffc4ef138d95, type: 2}
+  wallR: {fileID: 11400000, guid: e216505422c73ce47b310f38c557696f, type: 2}
+  surface: {fileID: 11400000, guid: b6499eb3388a40a41b36ca24795c25e2, type: 2}
+  ceiling: {fileID: 11400000, guid: 2c83e5c3b8009eb4d8cad616a4350bb4, type: 2}
+  surfacecornerL: {fileID: 11400000, guid: c7ca48740ccaedc44bc02abdac595753, type: 2}
+  surfacecornerR: {fileID: 11400000, guid: c06b207d0fa597c4e9f70dfbb8ec1ccd, type: 2}
+  wallcornerL: {fileID: 11400000, guid: f565dee0c94ee434ba465db705f146e0, type: 2}
+  wallcornerR: {fileID: 11400000, guid: d69e04f9b03bda944994c4e0c00ce119, type: 2}
+  entranceb: {fileID: 11400000, guid: fc0541ca2bdb5174e826e273664887bf, type: 2}
+  entrancet: {fileID: 11400000, guid: 5ad7705a12d81be4a8ea737409e90a47, type: 2}
+  exitT: {fileID: 11400000, guid: ab010b9c914b95442a64d3b849b56709, type: 2}
+  exitb: {fileID: 11400000, guid: 9638ea0cdc1e4f041a15b4bd40dea6f2, type: 2}
