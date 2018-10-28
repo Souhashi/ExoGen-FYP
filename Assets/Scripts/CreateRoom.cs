@@ -14,32 +14,9 @@ public class CreateRoom : MonoBehaviour
 
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
-        shuffle = GetComponent<Shuffle>();
-        //shuffle.Swap(map.rooms, 1, 4);
-        for (int j = 0; j < map.rooms.Count; j++)
-        {
-            map.rooms[j].SetEntrance();
-            map.rooms[j].SetExit();
-        }
-        for (int i = 0; i < map.rooms.Count; i++)
-        {
-            if (i >= 1)
-            {
-                int indexA = i - 1;
-                int indexB = i;
-               
-               
-               shuffle.Align(map.rooms, indexA, indexB);
-               
-              //shuffle.AlignY(map.rooms, indexA, indexB);
-              //shuffle.CheckCollision(map.rooms, indexA, indexB);
-                
-                Debug.Log((i - 1) + ": " + i);
-            }
-
-        }
+       
        // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
         // shuffle.Swap(map.rooms,  0, 5);
         foreach (Room r in map.rooms)

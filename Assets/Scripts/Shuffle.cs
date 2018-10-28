@@ -107,7 +107,7 @@ public class Shuffle : MonoBehaviour
         {
             r[indexB].SetTranslatePos(r[indexA].getexit().x - 1, r[indexA].getexit().y);
         }
-        
+       
         r[indexB].SetEntrance();
         r[indexB].SetExit();
         r[indexA].SetEntrance();
@@ -175,17 +175,30 @@ public class Shuffle : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-       
 
+
+     
+        //shuffle.Swap(map.rooms, 1, 4);
+        for (int j = 0; j < map.rooms.Count; j++)
+        {
+            map.rooms[j].SetEntrance();
+            map.rooms[j].SetExit();
+        }
         for (int i = 0; i < map.rooms.Count; i++)
         {
             if (i >= 1)
             {
                 int indexA = i - 1;
                 int indexB = i;
-                //Align(map.rooms, indexA, indexB);
+
+
+                Align(map.rooms, indexA, indexB);
+
+                //shuffle.AlignY(map.rooms, indexA, indexB);
+                //shuffle.CheckCollision(map.rooms, indexA, indexB);
+
                 Debug.Log((i - 1) + ": " + i);
             }
 
