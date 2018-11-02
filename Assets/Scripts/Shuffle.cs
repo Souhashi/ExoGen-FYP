@@ -8,19 +8,10 @@ public class Shuffle : MonoBehaviour
     //We need to make this better!
     public Map map;
     private Room room1, room2;
-    private List<Vector3Int> places = new List<Vector3Int>();
-    private List<Vector3Int> places1 = new List<Vector3Int>();
-    private List<Vector3Int> offset = new List<Vector3Int>();
-    private List<Vector3Int> offset1 = new List<Vector3Int>();
-    private List<TileBase> Tiles = new List<TileBase>();
-    private List<TileBase> Tiles1 = new List<TileBase>();
-    private List<Matrix4x4> transform1 = new List<Matrix4x4>();
-    private List<Matrix4x4> transform2 = new List<Matrix4x4>();
-    private List<Vector3Int> entrance = new List<Vector3Int>();
-    private List<Vector3Int> exit = new List<Vector3Int>();
-    enum Direction { Up, Down, Left, Right, Aligned, LeftColliding, RightColliding };
+   
+    
 
-
+    public Tilemap stairs;
     public Tilemap tilemap;
 
     /* public void InitializeBounds(Room r) {
@@ -28,35 +19,36 @@ public class Shuffle : MonoBehaviour
 
      }*/
 
-    void GetCoords(Room r, List<Vector3Int> p, List<TileBase> t, List<Matrix4x4> tr)
+    void GetCoords(Room r)
     {
-        // Debug.Log(r.entrance.x + " " + r.entrance.y);
-        //  Debug.Log(r.exit.x + " " + r.exit.y);
+       
         Vector3Int position;
-        for (int x = r.position.x; x < r.position.x + r.width; x++)
+        for (int x = r.position.x; x <= r.position.x + r.width; x++)
         {
-            for (int y = r.position.y; y < r.position.y + r.height; y++)
+            for (int y = r.position.y; y <= r.position.y + r.height; y++)
             {
                 position = new Vector3Int(x, y, 0);
                 if (tilemap.HasTile(position))
                 {
-
-                    p.Add(position);
-                    t.Add(tilemap.GetTile(position));
-                    tr.Add(tilemap.GetTransformMatrix(position));
+                    r.GetTiles().Add(tilemap.GetTile(position));
+                    r.GetTransform().Add(tilemap.GetTransformMatrix(position));
+                    r.GetOffset().Add(new Vector3Int(x - r.position.x, y - r.position.y, 0));
+                    if (stairs != null)
+                    {
+                        if (stairs.HasTile(position))
+                        {
+                            r.GetTiles().Add(stairs.GetTile(position));
+                            r.GetTransform().Add(stairs.GetTransformMatrix(position));
+                            r.GetOffset().Add(new Vector3Int(x - r.position.x, y - r.position.y, 0));
+                        }
+                    }
 
                 }
-
-
 
             }
 
         }
-        Debug.Log(entrance.Count);
-        Debug.Log(exit.Count);
-        //Debug.Log(entrance2.x + " " + entrance2.y);
-        //Debug.Log(exit2.x + " " + exit2.y);
-
+     
     }
 
 
@@ -204,7 +196,7 @@ public class Shuffle : MonoBehaviour
 
         }
 
-        Debug.Log(places.Count);
+       // Debug.Log(places.Count);
         // InitializeBounds(rooms.room[1]);
 
         Debug.Log("I'm still alive!!!");
