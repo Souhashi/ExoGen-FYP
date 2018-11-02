@@ -9,17 +9,17 @@ public class CreateRoom : MonoBehaviour
 
     public Tilemap currentTilemap;
     public RoomPallete rp;
-    public Map map;
+    //public Map map;
     public Shuffle shuffle;
 
 
     // Use this for initialization
     void Start()
     {
-       
-       // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
+        shuffle = GetComponent<Shuffle>();
+        // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
         // shuffle.Swap(map.rooms,  0, 5);
-        foreach (Room r in map.rooms)
+        foreach (Room r in shuffle.GetClone().rooms) 
         {
             int i = 0; 
             createRoom(r);

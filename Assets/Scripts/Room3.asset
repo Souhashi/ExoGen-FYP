@@ -11,10 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c076d153daade2042a2ad446b931df14, type: 3}
   m_Name: Room3
   m_EditorClassIdentifier: 
-  position: {x: 29, y: 15, z: 0}
+  position: {x: 23, y: 15, z: 0}
   width: 21
   height: 14
   Type: 1
   entranceoffset: 3
   entrancelength: 2
   flipE: 0
+  hasStairs: 0

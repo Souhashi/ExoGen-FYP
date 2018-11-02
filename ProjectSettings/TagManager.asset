@@ -14,8 +14,8 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
+  - Layout
+  - Stairs
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Layout
+    uniqueID: 1028017577
+    locked: 0
+  - name: Stairs
+    uniqueID: 3036023055
     locked: 0

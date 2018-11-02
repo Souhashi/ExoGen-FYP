@@ -18,9 +18,15 @@ public class Room : ScriptableObject
     public int entranceoffset;
     public int entrancelength;
     public bool flipE;
+    public bool hasStairs;
     List<TileBase> tiles = new List<TileBase>();
     List<Vector3Int> offset = new List<Vector3Int>();
     List<Matrix4x4> tiletransform = new List<Matrix4x4>();
+    List<Vector3Int> tileposition = new List<Vector3Int>();
+    List<TileBase> stairtiles;
+    List<Vector3Int> stairoffset;
+    List<Matrix4x4> stairtransform;
+    List<Vector3Int> stairposition;
 
     public Vector3Int getexit()
     {
@@ -35,9 +41,29 @@ public class Room : ScriptableObject
 
     public List<Matrix4x4> GetTransform() { return tiletransform; }
 
+    public List<Vector3Int> GetPosition() { return tileposition; }
+
+    public List<TileBase> GetStairTiles() { return stairtiles; }
+
+    public List<Vector3Int> GetStairOffset() { return stairoffset; }
+
+    public List<Matrix4x4> GetStairTransform() { return stairtransform; }
+
+    public List<Vector3Int> GetStairPosition() { return stairposition; }
+    
     public void SetPosition(Vector3Int newpos)
     {
         position = newpos;
+    }
+
+    public void InitialiseLists() {
+        if (hasStairs)
+        {
+            stairtiles = new List<TileBase>();
+            stairoffset = new List<Vector3Int>();
+            stairtransform = new List<Matrix4x4>();
+            stairposition = new List<Vector3Int>();
+        }
     }
 
     public void SetEntrance()
