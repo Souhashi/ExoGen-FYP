@@ -11,11 +11,12 @@ public class CreateRoom : MonoBehaviour
     public RoomPallete rp;
     //public Map map;
     public Shuffle shuffle;
-
+    
 
     // Use this for initialization
     void Start()
     {
+        
         shuffle = GetComponent<Shuffle>();
         // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
         // shuffle.Swap(map.rooms,  0, 5);
@@ -42,7 +43,7 @@ public class CreateRoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void createRoom(Room r)
