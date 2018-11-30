@@ -6,4 +6,5 @@ using UnityEngine;
 public class Map : ScriptableObject {
    
     public List<Room> rooms;
+    
 }

@@ -223,7 +223,7 @@ public class Shuffle : MonoBehaviour
 
         //Swap(clone.rooms, 0, 2);
         SetAllEntrances(clone);
-        //Swap(clone.rooms, 0, 2);
+        Swap(clone.rooms, 0, 2);
         SetAllEntrances(clone);
         for (int i = 0; i < map.rooms.Count; i++)
         {
@@ -238,12 +238,12 @@ public class Shuffle : MonoBehaviour
             }
 
         }
-        /*GetCoords(clone.rooms[0]);
+        GetCoords(clone.rooms[0]);
         GetCoords(clone.rooms[2]);
         ClearRoom(clone.rooms[0]);
         ClearRoom(clone.rooms[2]);
         NewCoords(clone.rooms[2], clone.rooms[0]);
-        NewCoords(clone.rooms[0], clone.rooms[2]);*/
+        NewCoords(clone.rooms[0], clone.rooms[2]);
         
        /* foreach (Room r in clone.rooms)
         {

@@ -118,8 +118,11 @@
     <Compile Include="Assets\PennyPixel\Scripts\PlayerPlatformerController.cs" />
     <Compile Include="Assets\Scripts\CreateBackground.cs" />
     <Compile Include="Assets\Scripts\CreateRoom.cs" />
+    <Compile Include="Assets\Scripts\DependencyTree.cs" />
     <Compile Include="Assets\Scripts\Generator.cs" />
+    <Compile Include="Assets\Scripts\GraphNode.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
+    <Compile Include="Assets\Scripts\PlaceObjects.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\RoomPallete.cs" />
     <Compile Include="Assets\Scripts\Shuffle.cs" />
