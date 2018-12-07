@@ -49,7 +49,7 @@ public class PlaceObjects : MonoBehaviour {
             Spawn(r);
         }
         n.state = GraphNode.State.Black;
-        sorted.Add(n);
+        sorted.Insert(0, n);
 
     }
 	// Use this for initialization

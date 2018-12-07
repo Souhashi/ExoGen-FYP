@@ -111,24 +111,25 @@ public class Shuffle : MonoBehaviour
     public void Align(IList<Room> r, int indexA, int indexB)
     {
 
-        if (r[indexB].position.x > r[indexA].position.x)
+        if (r[indexA].Type == Room.type.Right || r[indexA].Type == Room.type.TopRight || r[indexA].Type == Room.type.BottomRight)
         {
             r[indexB].SetTranslatePos(r[indexA].getexit().x + 1, r[indexA].getexit().y);
         }
-        else if (r[indexB].position.x < r[indexA].position.x)
+        else if (r[indexA].Type == Room.type.Left || r[indexA].Type == Room.type.TopLeft || r[indexA].Type == Room.type.BottomLeft)
         {
             r[indexB].SetTranslatePos(r[indexA].getexit().x - 1, r[indexA].getexit().y);
         }
-        else if (r[indexB].position.x == r[indexA].getexit().x - 1)
-        {
-            r[indexB].SetTranslatePos(r[indexA].getexit().x + 2, r[indexA].getexit().y);
-
-        }
-        else if (r[indexB].position.x == r[indexA].getexit().x + 1)
+       /* else if (r[indexB].position.x == r[indexA].getexit().x - 1)
         {
             r[indexB].SetTranslatePos(r[indexA].getexit().x - 2, r[indexA].getexit().y);
 
         }
+        else if (r[indexB].position.x == r[indexA].getexit().x + 1)
+        {
+            r[indexB].SetTranslatePos(r[indexA].getexit().x + 2, r[indexA].getexit().y);
+
+        }*/
+        
         r[indexB].SetEntrance();
         r[indexB].SetExit();
         r[indexA].SetEntrance();
@@ -162,22 +163,41 @@ public class Shuffle : MonoBehaviour
 
     }
 
-    void Selection()
+    void Replace(Room r)
+    {
+        for (int i = 0; i < r.GetPosition().Count; i++)
+        {
+            layout.SetTile(new Vector3Int(r.position.x + r.GetOffset()[i].x, r.position.y + r.GetOffset()[i].y, 0), r.GetTiles()[i]);
+            layout.SetTransformMatrix(new Vector3Int(r.position.x + r.GetOffset()[i].x, r.position.y + r.GetOffset()[i].y, 0), r.GetTransform()[i]);
+        }
+        if (r.hasStairs)
+        {
+            for (int j = 0; j < r.GetStairPosition().Count; j++)
+            {
+                stairs.SetTile(new Vector3Int(r.position.x + r.GetStairOffset()[j].x, r.position.y + r.GetStairOffset()[j].y, 0), r.GetStairTiles()[j]);
+                stairs.SetTransformMatrix(new Vector3Int(r.position.x + r.GetStairOffset()[j].x, r.position.y + r.GetStairOffset()[j].y, 0), r.GetStairTransform()[j]);
+
+            }
+
+        }
+    }
+
+    void Selection(IList<Room> temp)
     {
 
-        //bool hasmatched = false;
-        int index = Random.Range(0, map.rooms.Count - 1);
-        room1 = map.rooms[index];
-        Debug.Log(index);
-        for (int i = 0; i < map.rooms.Count; i++)
+        int room1, room2;
+        for (int i = 0; i < temp.Count; i++)
         {
+            room1 = Random.Range(0, temp.Count);
+            room2 = Random.Range(0, temp.Count);
 
-            if (map.rooms[i].Type == room1.Type && index != i)
+            if (temp[room1].Type == temp[room2].Type && room1 != room2)
             {
-                room2 = map.rooms[i];
-                Debug.Log(i);
-                break;
+                AlignRooms();
+                Swap(temp, room1, room2);
+                AlignRooms();
             }
+            else { Debug.Log("Iteration skipped");  continue; }
 
         }
 
@@ -201,7 +221,29 @@ public class Shuffle : MonoBehaviour
 
         temp1[index].height = temp1[index1].height;
         temp1[index1].height = tempheight;
-        
+
+        GetCoords(temp1[index]);
+        GetCoords(temp1[index1]);
+        ClearRoom(temp1[index]);
+        ClearRoom(temp1[index1]);
+        NewCoords(temp1[index], temp1[index1]);
+        NewCoords(temp1[index1], temp1[index]);
+
+    }
+
+    void GetRoomLayout()
+    {
+        foreach (Room r in clone.rooms) {
+            GetCoords(r);
+
+        }
+    }
+
+    void ClearRoomLayout()
+    {
+        foreach (Room r in clone.rooms) {
+            ClearRoom(r);
+        }
     }
 
     void SetAllEntrances(Map m)
@@ -214,17 +256,8 @@ public class Shuffle : MonoBehaviour
 
     }
 
-
-    // Use this for initialization
-    void Awake()
+    void AlignRooms()
     {
-
-        CopyMap(map);
-
-        //Swap(clone.rooms, 0, 2);
-        SetAllEntrances(clone);
-        Swap(clone.rooms, 0, 2);
-        SetAllEntrances(clone);
         for (int i = 0; i < map.rooms.Count; i++)
         {
             if (i >= 1)
@@ -238,12 +271,23 @@ public class Shuffle : MonoBehaviour
             }
 
         }
-        GetCoords(clone.rooms[0]);
-        GetCoords(clone.rooms[2]);
-        ClearRoom(clone.rooms[0]);
-        ClearRoom(clone.rooms[2]);
-        NewCoords(clone.rooms[2], clone.rooms[0]);
-        NewCoords(clone.rooms[0], clone.rooms[2]);
+
+
+    }
+
+
+    // Use this for initialization
+    void Awake()
+    {
+
+        CopyMap(map);
+       // AlignRooms();
+        //Swap(clone.rooms, 0, 2);
+        SetAllEntrances(clone);
+        Selection(clone.rooms);
+        SetAllEntrances(clone);
+        AlignRooms();
+        
         
        /* foreach (Room r in clone.rooms)
         {

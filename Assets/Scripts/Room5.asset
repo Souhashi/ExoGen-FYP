@@ -18,3 +18,4 @@ MonoBehaviour:
   entranceoffset: 1
   entrancelength: 2
   flipE: 0
+  hasStairs: 0
