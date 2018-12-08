@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c076d153daade2042a2ad446b931df14, type: 3}
   m_Name: Room7
   m_EditorClassIdentifier: 
-  position: {x: 6, y: -29, z: 0}
+  position: {x: -6, y: -29, z: 0}
   width: 20
   height: 5
   Type: 0

@@ -28,10 +28,10 @@ public class CreateRoom : MonoBehaviour
             // Debug.Log("Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
             // Debug.Log("Exit: " + r.getexit().x + ", " + r.getexit().y);
             //Debug.Log("Position: " + r.position.x + ", " + r.position.y);
-            Debug.Log("Room:" + i + " Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
-            Debug.Log("Room:" + i + " Exit: " + r.getexit().x + ", " + r.getexit().y);
-            r.SetTranslatePos(r.getentrance().x, r.getentrance().y);
-            Debug.Log("Room:"+i+" Position: " + r.position.x + ", " + r.position.y);
+           // Debug.Log("Room:" + i + " Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
+           // Debug.Log("Room:" + i + " Exit: " + r.getexit().x + ", " + r.getexit().y);
+           // r.SetTranslatePos(r.getentrance().x, r.getentrance().y);
+           Debug.Log("Room:"+i+" List: " + r.GetOffset().Count );
             i++;
             
 
