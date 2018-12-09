@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Name: Room9
   m_EditorClassIdentifier: 
   position: {x: -6, y: 45, z: 0}
-  width: 10
-  height: 10
-  Type: 6
+  width: 22
+  height: 15
+  Type: 1
   entranceoffset: 1
   entrancelength: 2
   flipE: 1

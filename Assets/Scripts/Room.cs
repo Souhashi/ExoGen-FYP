@@ -27,6 +27,7 @@ public class Room : ScriptableObject
     List<Vector3Int> stairoffset;
     List<Matrix4x4> stairtransform;
     List<Vector3Int> stairposition;
+    
 
     public Vector3Int getexit()
     {

@@ -317,12 +317,14 @@ public class Shuffle : MonoBehaviour
     {
 
         CopyMap(map);
-        // AlignRooms();
+        SetAllEntrances(clone);
+        AlignRooms();
         GetRoomLayout();
         ClearRoomLayout();
-        //Swap(clone.rooms, 2, 0);
+        //Swap(clone.rooms, 9, 2);
         SetAllEntrances(clone);
         Selection(clone.rooms);
+        //Swap(clone.rooms, 8, 2);
         SetAllEntrances(clone);
         AlignRooms();
         SetRoomLayout();

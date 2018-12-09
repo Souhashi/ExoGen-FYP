@@ -116,6 +116,7 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\PennyPixel\Scripts\PhysicsObject.cs" />
     <Compile Include="Assets\PennyPixel\Scripts\PlayerPlatformerController.cs" />
+    <Compile Include="Assets\Scripts\BoxBrush.cs" />
     <Compile Include="Assets\Scripts\CreateBackground.cs" />
     <Compile Include="Assets\Scripts\CreateRoom.cs" />
     <Compile Include="Assets\Scripts\DependencyTree.cs" />
