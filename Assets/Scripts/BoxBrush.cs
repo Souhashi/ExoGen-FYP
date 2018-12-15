@@ -12,20 +12,38 @@ namespace UnityEditor
         public bool isActive = false;
         public int width = 10;
         public int height = 10;
+        public Room r;
         public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position)
         {
             if (isActive)
             {
-
-                for (int i = boxpos.x; i < boxpos.x + width; i++)
+                boxpos = position;
+                if (r != null)
                 {
-                    for (int j = boxpos.y; j < boxpos.y + height; j++)
+                    for (int i = boxpos.x; i < boxpos.x + r.width; i++)
                     {
-                        Vector3Int pos = new Vector3Int(i, j, position.z);
-                        base.Paint(grid, brushTarget, pos);
+                        for (int j = boxpos.y; j < boxpos.y + r.height; j++)
+                        {
+                            Vector3Int pos = new Vector3Int(i, j, position.z);
+                            base.Paint(grid, brushTarget, pos);
+
+                        }
 
                     }
 
+                }
+                else
+                {
+                    for (int i = boxpos.x; i < boxpos.x + width; i++)
+                    {
+                        for (int j = boxpos.y; j < boxpos.y + height; j++)
+                        {
+                            Vector3Int pos = new Vector3Int(i, j, position.z);
+                            base.Paint(grid, brushTarget, pos);
+
+                        }
+
+                    }
                 }
                 isActive = false;
             }
@@ -35,6 +53,48 @@ namespace UnityEditor
                 isActive = true;
 
             }
+        }
+
+        public override void Erase(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
+        {
+            if (isActive)
+            {
+                boxpos = position;
+                if (r != null)
+                {
+                    for (int i = boxpos.x; i < boxpos.x + r.width; i++)
+                    {
+                        for (int j = boxpos.y; j < boxpos.y + r.height; j++)
+                        {
+                            Vector3Int pos = new Vector3Int(i, j, position.z);
+                            base.Erase(gridLayout, brushTarget, pos);
+                        }
+
+                    }
+
+                    isActive = false;
+
+                }
+                else {
+                    boxpos = position;
+                    for (int i = boxpos.x; i < boxpos.x + width; i++)
+                    {
+                        for (int j = boxpos.y; j < boxpos.y + height; j++)
+                        {
+                            Vector3Int pos = new Vector3Int(i, j, position.z);
+                            base.Erase(gridLayout, brushTarget, pos);
+                        }
+
+                    }
+
+                }
+            }
+            else {
+
+                boxpos = position;
+                isActive = true;
+            }
+            
         }
 
         [MenuItem("Assets/Create/Box Brush")]
