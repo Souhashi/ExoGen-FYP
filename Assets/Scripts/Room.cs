@@ -9,24 +9,24 @@ public class Room : ScriptableObject
 {
 
     public Vector3Int position;
-    Vector3Int entrance;
+    protected Vector3Int entrance;
     Vector3Int exit;
     public int width;
     public int height;
     public type Type;
-    public enum type { Left, Right, TopLeft, TopRight, BottomLeft, BottomRight, DeadEnd };
+    public enum type { Left, Right, TopLeft, TopRight, BottomLeft, BottomRight, DeadEnd};
     public int entranceoffset;
     public int entrancelength;
     public bool flipE;
     public bool hasStairs;
-    List<TileBase> tiles = new List<TileBase>();
-    List<Vector3Int> offset = new List<Vector3Int>();
-    List<Matrix4x4> tiletransform = new List<Matrix4x4>();
-    List<Vector3Int> tileposition = new List<Vector3Int>();
-    List<TileBase> stairtiles;
-    List<Vector3Int> stairoffset;
-    List<Matrix4x4> stairtransform;
-    List<Vector3Int> stairposition;
+    protected List<TileBase> tiles = new List<TileBase>();
+    protected List<Vector3Int> offset = new List<Vector3Int>();
+    protected List<Matrix4x4> tiletransform = new List<Matrix4x4>();
+    protected List<Vector3Int> tileposition = new List<Vector3Int>();
+    protected List<TileBase> stairtiles;
+    protected List<Vector3Int> stairoffset;
+    protected List<Matrix4x4> stairtransform;
+    protected List<Vector3Int> stairposition;
     
 
     public Vector3Int getexit()
@@ -148,7 +148,7 @@ public class Room : ScriptableObject
         //entrance = new Vector3Int(r. y, 0);
     }
 
-    public void SetExit()
+    public virtual void SetExit()
     {
 
         switch (Type)

@@ -22697,7 +22697,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45999727, y: -0.90000075, z: -9}
+  m_LocalPosition: {x: -0.4599974, y: -0.90000075, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -23627,7 +23627,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582423501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45999727, y: -0.90000075, z: -9}
+  m_LocalPosition: {x: -0.4599974, y: -0.90000075, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 219311968}
@@ -23760,6 +23760,7 @@ GameObject:
   - component: {fileID: 2100484450}
   - component: {fileID: 2100484447}
   - component: {fileID: 2100484451}
+  - component: {fileID: 2100484452}
   m_Layer: 9
   m_Name: Layout
   m_TagString: Untagged
@@ -27386,4 +27387,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd29ff68fa309de43b53477f77222f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollectableGem: {fileID: 1764816090862790, guid: 75cabef8c622f42229b80fec978c6a10,
+    type: 2}
+--- !u!114 &2100484452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2100484443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbbfa1eb9a2dd245972785fe19d4e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   map: {fileID: 11400000, guid: 5a5e33428f118d544a946cd38c616516, type: 2}
+  stairs: {fileID: 765058874}
+  tilemap: {fileID: 1171563544}
+  layout: {fileID: 2100484446}

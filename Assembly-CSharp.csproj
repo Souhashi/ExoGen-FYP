@@ -114,6 +114,10 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\CollectableGem\Audio\GemCollectedAudioModifier.cs" />
+    <Compile Include="Assets\CollectableGem\Gems Ultimate Pack\Scripts\AnimationScript.cs" />
+    <Compile Include="Assets\CollectableGem\Scripts\GemBehaviour.cs" />
+    <Compile Include="Assets\CollectableGem\Scripts\Rotate.cs" />
     <Compile Include="Assets\PennyPixel\Scripts\PhysicsObject.cs" />
     <Compile Include="Assets\PennyPixel\Scripts\PlayerPlatformerController.cs" />
     <Compile Include="Assets\Scripts\BoxBrush.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Assets\Scripts\DependencyTree.cs" />
     <Compile Include="Assets\Scripts\Generator.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
+    <Compile Include="Assets\Scripts\HubRoom.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\PlaceObjects.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />

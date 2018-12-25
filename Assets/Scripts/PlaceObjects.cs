@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlaceObjects : MonoBehaviour {
-    public Map map;
+    Shuffle map;
     List<GraphNode> items= new List<GraphNode>();
     DependencyTree tree;
     List<GraphNode> sorted = new List<GraphNode>();
+    public GameObject CollectableGem;
     void InitialiseNodes()
     {
-        foreach (Room r in map.rooms)
+        foreach (Room r in map.GetClone().rooms)
         {
             items.Add(new GraphNode(r));
         }
@@ -49,16 +50,18 @@ public class PlaceObjects : MonoBehaviour {
             Spawn(r);
         }
         n.state = GraphNode.State.Black;
-        sorted.Insert(0, n);
+        sorted.Add(n);
 
     }
 	// Use this for initialization
 	void Start () {
+        map= GetComponent<Shuffle>();
         InitialiseNodes();
         Dependencies();
         Sort();
-        foreach (GraphNode n in items) {
+        foreach (GraphNode n in sorted) {
             Debug.Log("Node:"+ n.nodeID);
+            GameObject g = Instantiate(CollectableGem, n.Place(), Quaternion.identity);
         }
 	}
 	

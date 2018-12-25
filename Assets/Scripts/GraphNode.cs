@@ -5,7 +5,7 @@ using UnityEngine;
 public class GraphNode  {
 
     private Vector3Int position;
-   
+    
     private Room room;
     private List<GraphNode> neighbours;
     public static int counter = 0;
@@ -22,21 +22,19 @@ public class GraphNode  {
         state = State.White;
     }
 
-    public void Place()
+    public Vector3Int Place()
     {
-        bool isValid = false;
-        
-        while (!isValid)
+       // bool isValid = false;
+        position = new Vector3Int(Random.Range(room.position.x+2, room.position.x + room.width-1), Random.Range(room.position.y+2, room.position.y + room.height-1), 0);
+        foreach (Vector3Int p in room.GetPosition())
         {
-            foreach (Vector3Int pos in room.GetPosition())
-            {
-                position = new Vector3Int(Random.Range(room.position.x+1, room.position.x + room.width-1), Random.Range(room.position.y+1, room.position.y + room.height-1), 0);
-                if (position != pos)
-                {
-                    isValid = true;
-                }
+            if (position == p) {
+                position = new Vector3Int(Random.Range(room.position.x + 2, room.position.x + room.width - 1), Random.Range(room.position.y + 2, room.position.y + room.height - 1), 0);
             }
         }
+        Debug.Log("RPos: " + room.position.x + ", " + room.position.y);      
+        Debug.Log("Pos: " + position.x + ", " + position.y);
+        return position;
     }
 
     public List<GraphNode> getNeighbours()
