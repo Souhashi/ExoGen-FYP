@@ -11,14 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b4f2499eb21834d9014d697ff9cd2f, type: 3}
   m_Name: New Hub Room
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0, z: 0}
-  width: 0
-  height: 0
-  Type: 0
-  entranceoffset: 0
-  entrancelength: 0
+  position: {x: 50, y: -49, z: 0}
+  width: 20
+  height: 20
+  Type: 3
+  entranceoffset: 2
+  entrancelength: 2
   flipE: 0
   hasStairs: 0
-  numexits: 0
-  offsets: []
-  lengths: []
+  offsets: 010000000100000001000000
+  lengths: 020000000200000003000000
+  isexit: 010101
+  isHub: 1

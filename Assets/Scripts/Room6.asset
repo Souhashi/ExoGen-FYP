@@ -19,3 +19,7 @@ MonoBehaviour:
   entrancelength: 2
   flipE: 0
   hasStairs: 0
+  offsets: 
+  lengths: 
+  isexit: 
+  isHub: 0

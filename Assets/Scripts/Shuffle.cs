@@ -11,11 +11,21 @@ public class Shuffle : MonoBehaviour
     public Tilemap stairs;
     public Tilemap tilemap;
     public Tilemap layout;
+
     Map clone;
     /* public void InitializeBounds(Room r) {
          roombounds = new BoundsInt(new Vector3Int(0, 0, 0), new Vector3Int(r.width, r.height, 0));
 
      }*/
+
+    public void ClearLists(Map m)
+    {
+        foreach (Room r in map.rooms)
+        {
+            r.ClearLists();
+        }
+            { }
+    }
 
     void CopyMap(Map m)
     {
@@ -184,20 +194,26 @@ public class Shuffle : MonoBehaviour
     {
 
         int room1, room2;
-        for (int i = 0; i < temp.Count; i++)
+        for (int i = 0; i < 15; i++)
         {
             room1 = Random.Range(0, temp.Count);
+            
             room2 = Random.Range(0, temp.Count);
-
+            
             if (temp[room1].Type == temp[room2].Type && room1 != room2 && temp[room1].flipE == temp[room2].flipE)
             {
                 //AlignRooms();
                 if (room1 > room2)
                 {
-                    Swap(temp, room1, room2);
+                    Debug.Log("Index1: " + room1);
+                    Debug.Log("Index2: " + room2);
+                    Swap1(temp, room2, room1);
+                    
                 }
                 else
                 {
+                    Debug.Log("EIndex1: " + room1);
+                    Debug.Log("EIndex2: " + room2);
                     Swap(temp, room2, room1);
                 }
                // AlignRooms();
@@ -212,27 +228,7 @@ public class Shuffle : MonoBehaviour
     public void Swap(IList<Room> temp1, int index, int index1)
     {
 
-        /*int tempwidth = temp1[index].width;
-        int tempheight = temp1[index].height;
-
-        List<TileBase> temptiles = temp1[index].GetTiles();
-        List<Vector3Int> tempoffset = temp1[index].GetOffset();
-        List<Matrix4x4> temptransform = temp1[index].GetTransform();
-
-        List<TileBase> tempstiles = temp1[index].GetStairTiles();
-        List<Vector3Int> tempsoffset = temp1[index].GetStairOffset();
-        List<Matrix4x4> tempstransform = temp1[index].GetStairTransform();
-
-        temp1[index].SetEntrance();
-        temp1[index].SetExit();
-        temp1[index1].SetEntrance();
-        temp1[index1].SetExit();
-
-        temp1[index].width = temp1[index1].width;
-        temp1[index1].width = tempwidth;
-
-        temp1[index].height = temp1[index1].height;
-        temp1[index1].height = tempheight;*/
+        
 
         Room temp = temp1[index];
         Vector3Int pos = temp1[index1].position;
@@ -241,8 +237,8 @@ public class Shuffle : MonoBehaviour
         temp1[index1] = temp;
         temp1[index1].SetPosition(temp1[index].position);
         temp1[index].SetPosition(pos);
-        temp1[index1].entranceoffset = temp1[index].entranceoffset;
-        temp1[index1].entranceoffset = tempeo;
+       // temp1[index1].entranceoffset = temp1[index].entranceoffset;
+       // temp1[index1].entranceoffset = tempeo;
         
         temp1[index].SetEntrance();
         temp1[index].SetExit();
@@ -253,6 +249,23 @@ public class Shuffle : MonoBehaviour
         // NewCoords(temp1[index], temp1[index1]);
         // NewCoords(temp1[index1], temp1[index]);
 
+    }
+
+    public void Swap1(IList<Room> temp1, int index, int index1)
+    {
+        Room temp = temp1[index];
+        Vector3Int pos = temp1[index].position;
+        int tempeo = temp1[index1].entranceoffset;
+        temp1[index] = temp1[index1];
+        temp1[index] = temp;
+        
+        // temp1[index1].entranceoffset = temp1[index].entranceoffset;
+        // temp1[index1].entranceoffset = tempeo;
+
+        temp1[index].SetEntrance();
+        temp1[index].SetExit();
+        temp1[index1].SetEntrance();
+        temp1[index1].SetExit();
     }
 
     void GetRoomLayout()
@@ -315,8 +328,9 @@ public class Shuffle : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-
+        Debug.Log("Shuffle is executed...");
         CopyMap(map);
+        ClearLists(clone);
         SetAllEntrances(clone);
         AlignRooms();
         GetRoomLayout();

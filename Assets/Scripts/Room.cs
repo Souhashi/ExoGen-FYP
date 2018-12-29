@@ -27,8 +27,12 @@ public class Room : ScriptableObject
     protected List<Vector3Int> stairoffset;
     protected List<Matrix4x4> stairtransform;
     protected List<Vector3Int> stairposition;
-    
-
+    protected int numexits;
+    protected List<Vector3Int> exits = new List<Vector3Int>();
+    public List<int> offsets;
+    public List<int> lengths;
+    public bool[] isexit;
+    public bool isHub;
     public Vector3Int getexit()
     {
         return exit;
@@ -65,6 +69,18 @@ public class Room : ScriptableObject
             stairtransform = new List<Matrix4x4>();
             stairposition = new List<Vector3Int>();
         }
+    }
+
+    public void ClearLists()
+    {
+        tiles.Clear();
+        offset.Clear();
+        tiletransform.Clear();
+        tileposition.Clear();
+        stairtiles.Clear();
+        stairoffset.Clear();
+        stairtransform.Clear();
+        stairposition.Clear();
     }
 
     public void SetEntrance()

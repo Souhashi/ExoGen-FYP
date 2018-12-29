@@ -10,13 +10,13 @@ public class CreateRoom : MonoBehaviour
     public Tilemap currentTilemap;
     public RoomPallete rp;
     //public Map map;
+
     public Shuffle shuffle;
-    
 
     // Use this for initialization
     void Start()
     {
-        
+
         shuffle = GetComponent<Shuffle>();
         // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
         // shuffle.Swap(map.rooms,  0, 5);
@@ -24,7 +24,14 @@ public class CreateRoom : MonoBehaviour
         {
             int i = 0; 
             createRoom(r);
-            CreateEntrances(r);
+            if (r is HubRoom)
+            {
+                CreateHubEntrances(r);
+            }
+            else
+            {
+                CreateEntrances(r);
+            }
             // Debug.Log("Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
             // Debug.Log("Exit: " + r.getexit().x + ", " + r.getexit().y);
             //Debug.Log("Position: " + r.position.x + ", " + r.position.y);
@@ -485,6 +492,712 @@ public class CreateRoom : MonoBehaviour
                     break;
                 }
 
+
+        }
+
+    }
+
+    public void CreateHubEntrances(Room r)
+    {
+        int entrance, length;
+        switch (r.Type)
+        {
+            case Room.type.Right:
+            case Room.type.TopRight:
+                entrance = r.position.y + r.entranceoffset;
+                length = r.position.y + r.entranceoffset + r.entrancelength;
+
+                for (int i = entrance; i < length; i++)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                }
+                currentTilemap.SetTile(new Vector3Int(r.position.x, length, 0), rp.entrancet);
+                if (r.entranceoffset == 1)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, entrance - 1, 0), rp.surface);
+                }
+                else
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, entrance - 1, 0), rp.entranceb);
+                    
+                }
+
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.height - 1 - r.offsets[1]; i > r.position.y + r.height - 1 - r.offsets[1] - r.lengths[1]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] + 1, 0), rp.exitT);
+
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[1]; i > r.position.y + r.height - 1 - r.offsets[1] - r.lengths[1]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.exitb);
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.exitb);
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.height - 1 - r.offsets[1]; i > r.position.y + r.height - 1 - r.offsets[1] - r.lengths[1]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[1] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.exitb);
+                    }
+                }
+                break;
+            case Room.type.BottomRight:
+                for (int i = r.position.y + r.height - 1 - r.entranceoffset; i > r.position.y + r.height - 1 - r.entranceoffset - r.entrancelength; i--)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                }
+                if (r.entranceoffset == 1)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.entranceoffset - 2, 0), rp.entranceb);
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                }
+                else
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.entranceoffset - 2, 0), rp.entranceb);
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.entranceoffset + 1, 0), rp.entrancet);
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.offsets[1]; i < r.position.y + r.offsets[1] + r.lengths[1]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] - 1, 0), rp.exitb);
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.offsets[1]; i < r.position.y + r.offsets[1] + r.lengths[1]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] - 1, 0), rp.exitb);
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.entranceb);
+                    }
+
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.offsets[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.entranceb);
+                    }
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.offsets[1]; i < r.position.y + r.offsets[1] + r.lengths[1]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[1] - 1, 0), rp.exitb);
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.entranceb);
+                    }
+
+                }
+                    break;
+            case Room.type.Left:
+            case Room.type.TopLeft:
+                entrance = r.position.y + r.entranceoffset;
+                length = r.position.y + r.entrancelength + r.entranceoffset;
+                for (int i = entrance; i < length; i++)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                }
+                currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, length, 0), rp.exitT);
+                if (r.entranceoffset == 1)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, entrance - 1, 0), rp.surface);
+                }
+                else
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, entrance - 1, 0), rp.exitb);
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.height - 1 - r.offsets[1]; i > r.position.y + r.height - 1 - r.offsets[1] - r.lengths[1]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] + 1, 0), rp.entrancet);
+
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[1]; i > r.position.y + r.height - 1 - r.offsets[1] - r.lengths[1]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.entranceb);
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.entranceb);
+                    }
+
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.exitb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.exitT);
+
+                    }
+                    for (int i = r.position.y + r.height - 1 - r.offsets[1]; i > r.position.y + r.height - 1 - r.offsets[1] - r.lengths[1]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[1] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[2] - 1, 0), rp.entranceb);
+                    }
+                }
+                    break;
+            case Room.type.BottomLeft:
+                for (int i = r.position.y + r.height - 1 - r.entranceoffset; i > r.position.y + r.height - 1 - r.entranceoffset - r.entrancelength; i--)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                }
+                if (r.entranceoffset == 1)
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.entranceoffset - 2, 0), rp.exitb);
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                }
+                else
+                {
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.entranceoffset - 2, 0), rp.exitb);
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1 - r.entranceoffset + 1, 0), rp.exitT);
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.offsets[1]; i < r.position.y + r.offsets[1] + r.lengths[1]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] - 1, 0), rp.entranceb);
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.offsets[1]; i < r.position.y + r.offsets[1] + r.lengths[1]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] - 1, 0), rp.entranceb);
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.exitb);
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.exitb);
+                    }
+
+                }
+                if (r.isexit.Length == 3 && r.isexit[0] == true && r.isexit[1] == true && r.isexit[2] == true)
+                {
+                    for (int i = r.position.y + r.height - 1 - r.offsets[0]; i > r.position.y + r.height - 1 - r.offsets[0] - r.lengths[0]; i--)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                    }
+                    if (r.offsets[0] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] - 2, 0), rp.entranceb);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1 - r.offsets[0] + 1, 0), rp.entrancet);
+
+                    }
+                    for (int i = r.position.y + r.offsets[1]; i < r.position.y + r.offsets[1] + r.lengths[1]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+
+                    }
+                    if (r.offsets[1] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] + r.lengths[1], 0), rp.entrancet);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.offsets[1] - 1, 0), rp.entranceb);
+                    }
+                    for (int i = r.position.y + r.offsets[2]; i < r.position.y + r.offsets[2] + r.lengths[2]; i++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                    }
+                    if (r.offsets[2] == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] + r.lengths[2], 0), rp.exitT);
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.offsets[2] - 1, 0), rp.exitb);
+                    }
+                }
+                    break;
+                
 
         }
 
