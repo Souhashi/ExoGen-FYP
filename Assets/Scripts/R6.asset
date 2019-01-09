@@ -8,18 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b4f2499eb21834d9014d697ff9cd2f, type: 3}
-  m_Name: New Hub Room
+  m_Script: {fileID: 11500000, guid: c076d153daade2042a2ad446b931df14, type: 3}
+  m_Name: R6
   m_EditorClassIdentifier: 
-  position: {x: 50, y: -49, z: 0}
+  position: {x: 0, y: 0, z: 0}
   width: 20
   height: 20
-  Type: 3
+  Type: 1
   entranceoffset: 2
   entrancelength: 2
   flipE: 0
   hasStairs: 0
-  offsets: 010000000100000001000000
-  lengths: 020000000200000003000000
-  isexit: 010101
-  isHub: 1
+  offsets: 
+  lengths: 
+  isexit: 
+  isHub: 0
+  identifier: 0

@@ -33,9 +33,14 @@ public class Room : ScriptableObject
     public List<int> lengths;
     public bool[] isexit;
     public bool isHub;
+    public int identifier;
     public Vector3Int getexit()
     {
         return exit;
+    }
+    public List<Vector3Int> getexits()
+    {
+        return exits;
     }
 
     public Vector3Int getentrance() { return entrance; }

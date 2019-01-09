@@ -6,5 +6,6 @@ using UnityEngine;
 public class Map : ScriptableObject {
    
     public List<Room> rooms;
-    
+    public Vector3Int anchorpoint;
+    public List<int> hubroomentrance;
 }

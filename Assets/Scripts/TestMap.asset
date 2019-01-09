@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543081616a541354a8f904243d180d30, type: 3}
+  m_Name: TestMap
+  m_EditorClassIdentifier: 
+  rooms:
+  - {fileID: 11400000, guid: 123e5aafd46407e41b693333e592abb5, type: 2}
+  - {fileID: 11400000, guid: fb6d7a9080be5454f98210d34146048b, type: 2}
+  - {fileID: 11400000, guid: f44510a191e87c14bae1763f777b3a77, type: 2}
+  - {fileID: 11400000, guid: e8513b840efac884e9d3c1d6f3240bf6, type: 2}
+  - {fileID: 11400000, guid: 4f7d6a8a334b6cf4c8eb94bd20081e9d, type: 2}
+  - {fileID: 11400000, guid: d340beef64bf90544a952d6428530b9e, type: 2}
+  - {fileID: 11400000, guid: 9279c79d287187a4dbd30170bd83d2c1, type: 2}
+  - {fileID: 11400000, guid: e7d6094c4645a4243b8381a1ad6a3818, type: 2}
+  - {fileID: 11400000, guid: e61682f16c3addf419dd8f8a9a980e8b, type: 2}
+  - {fileID: 11400000, guid: 2d97f810d0fb4d14e8ba106149a0b39a, type: 2}
+  - {fileID: 11400000, guid: 57a67d92f5c2f844a808d31a432762ce, type: 2}
+  - {fileID: 11400000, guid: 6331a15bab136544385e4e5df575ae94, type: 2}
+  - {fileID: 11400000, guid: ab1442f07c06ee14c9ed8255fe78c0bb, type: 2}
+  anchorpoint: {x: 0, y: 0, z: 0}
+  hubroomentrance: 01000000

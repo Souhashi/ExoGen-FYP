@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\CreateBackground.cs" />
     <Compile Include="Assets\Scripts\CreateRoom.cs" />
     <Compile Include="Assets\Scripts\DependencyTree.cs" />
+    <Compile Include="Assets\Scripts\GameMap.cs" />
     <Compile Include="Assets\Scripts\Generator.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
     <Compile Include="Assets\Scripts\HubRoom.cs" />

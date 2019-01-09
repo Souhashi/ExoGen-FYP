@@ -19,18 +19,22 @@ public class CreateRoom : MonoBehaviour
 
         shuffle = GetComponent<Shuffle>();
         // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
+        Debug.Log("Map size: " + shuffle.getclones().Count);
         // shuffle.Swap(map.rooms,  0, 5);
-        foreach (Room r in shuffle.GetClone().rooms) 
-        {
-            int i = 0; 
-            createRoom(r);
-            if (r is HubRoom)
+        foreach (Map m in shuffle.getclones()) {
+            foreach (Room r in m.rooms)
             {
-                CreateHubEntrances(r);
-            }
-            else
-            {
-                CreateEntrances(r);
+                //Debug.Log("x: "+ r.position.x +"y: "+ r.position.y + "w: "+ r.width + "h:"+ r.height);
+                int i = 0;
+                createRoom(r);
+                if (r is HubRoom)
+                {
+                    CreateHubEntrances(r);
+                }
+                else
+                {
+                    CreateEntrances(r);
+                }
             }
             // Debug.Log("Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
             // Debug.Log("Exit: " + r.getexit().x + ", " + r.getexit().y);
@@ -38,8 +42,8 @@ public class CreateRoom : MonoBehaviour
            // Debug.Log("Room:" + i + " Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
            // Debug.Log("Room:" + i + " Exit: " + r.getexit().x + ", " + r.getexit().y);
            // r.SetTranslatePos(r.getentrance().x, r.getentrance().y);
-           Debug.Log("Room:"+i+" List: " + r.GetOffset().Count );
-            i++;
+          // Debug.Log("Room:"+i+" List: " + r.GetOffset().Count );
+           // i++;
             
 
         }
