@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: TMR4
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
-  width: 20
-  height: 10
+  width: 30
+  height: 12
   Type: 1
   entranceoffset: 2
   entrancelength: 2

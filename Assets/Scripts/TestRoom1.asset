@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: TestRoom1
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
-  width: 10
+  width: 15
   height: 10
   Type: 1
   entranceoffset: 2
@@ -23,3 +23,4 @@ MonoBehaviour:
   lengths: 
   isexit: 
   isHub: 0
+  identifier: 0

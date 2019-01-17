@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: R5
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
-  width: 10
+  width: 15
   height: 10
   Type: 1
   entranceoffset: 2

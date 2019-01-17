@@ -14,6 +14,7 @@ public class Shuffle : MonoBehaviour
     public GameMap gamemap;
     List<Map> clones = new List<Map>();
     Map clone;
+    
     /* public void InitializeBounds(Room r) {
          roombounds = new BoundsInt(new Vector3Int(0, 0, 0), new Vector3Int(r.width, r.height, 0));
 
@@ -32,7 +33,7 @@ public class Shuffle : MonoBehaviour
         return clones;
     }
 
-    void CopyMap(Map m)
+    Map CopyMap(Map m)
     {
         clone = null;
         clone = Object.Instantiate(m) as Map;
@@ -43,6 +44,7 @@ public class Shuffle : MonoBehaviour
             t = Object.Instantiate(r) as Room;
             clone.rooms.Add(t);
         }
+        return clone;
         Debug.Log(clone.rooms.Count);
         foreach (Room r in clone.rooms) {
             Debug.Log("Position: " + r.position.x + ", " + r.position.y);
@@ -120,68 +122,29 @@ public class Shuffle : MonoBehaviour
 
     }
 
-    public void Align(IList<Room> r, int indexA, int indexB, int hbc)
+    public void Align(IList<Room> r, int indexA, int indexB)
     {
         int hubroomc = 0;
 
         if (r[indexA].Type == Room.type.Right || r[indexA].Type == Room.type.TopRight || r[indexA].Type == Room.type.BottomRight)
         {
-            if (r[indexA] is HubRoom)
-            {
-                if (r[indexB].Type == Room.type.Left || r[indexB].Type == Room.type.TopLeft || r[indexB].Type == Room.type.BottomLeft)
-                {
-                    r[indexB].SetTranslatePos(r[indexA].getexits()[hbc].x - 1, r[indexA].getexits()[hbc].y);
-                }
-                else
-                {
-                    r[indexB].SetTranslatePos(r[indexA].getexits()[hbc].x + 1, r[indexA].getexits()[hbc].y);
-                }
-                
-            }
-            else
-            {
-                r[indexB].SetTranslatePos(r[indexA].getexit().x + 1, r[indexA].getexit().y);
-            }
+            
+        r[indexB].SetTranslatePos(r[indexA].getexit().x + 1, r[indexA].getexit().y);
+            
         }
         else if (r[indexA].Type == Room.type.Left || r[indexA].Type == Room.type.TopLeft || r[indexA].Type == Room.type.BottomLeft)
         {
-            if (r[indexA] is HubRoom)
-            {
-                if (r[indexB].Type == Room.type.Right || r[indexB].Type == Room.type.TopRight || r[indexB].Type == Room.type.BottomRight)
-                {
-                    r[indexB].SetTranslatePos(r[indexA].getexits()[hbc].x + 1, r[indexA].getexits()[hbc].y);
-                }
-                else
-                {
-                    r[indexB].SetTranslatePos(r[indexA].getexits()[hbc].x - 1, r[indexA].getexits()[hbc].y);
-
-                }
-            }
-            else
-            {
-                r[indexB].SetTranslatePos(r[indexA].getexit().x - 1, r[indexA].getexit().y);
-            }
+           
+        r[indexB].SetTranslatePos(r[indexA].getexit().x - 1, r[indexA].getexit().y);
+            
         }
-       /* else if (r[indexB].position.x == r[indexA].getexit().x - 1)
-        {
-            r[indexB].SetTranslatePos(r[indexA].getexit().x - 2, r[indexA].getexit().y);
-
-        }
-        else if (r[indexB].position.x == r[indexA].getexit().x + 1)
-        {
-            r[indexB].SetTranslatePos(r[indexA].getexit().x + 2, r[indexA].getexit().y);
-
-        }*/
+      
         
         r[indexB].SetEntrance();
         r[indexB].SetExit();
         r[indexA].SetEntrance();
         r[indexA].SetExit();
-        /*foreach (Room a in r) {
-            Debug.Log("Aligned Position $: " + a.position.x + ", " + a.position.y);
-        }*/
-        //Debug.Log("Y Offset: " + yOffset);
-
+       
     }
     
 
@@ -226,108 +189,41 @@ public class Shuffle : MonoBehaviour
         }
     }
 
+    bool CheckType(Room a, Room b) {
+        if ((a.Type == Room.type.Right || a.Type == Room.type.TopRight || a.Type == Room.type.BottomRight) 
+            && (b.Type == Room.type.Right || b.Type == Room.type.TopRight || b.Type == Room.type.BottomRight) && (a.isHub == false && b.isHub == false))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     void Selection(IList<Room> temp)
     {
-
-        int room1, room2;
-        for (int i = 0; i < 15; i++)
+        Debug.Log("Selection is ran...");
+        int n = temp.Count;
+        while (n > 1)
         {
-            room1 = Random.Range(0, temp.Count);
-            
-            room2 = Random.Range(0, temp.Count);
-            
-            if (temp[room1].Type == temp[room2].Type && room1 != room2 && temp[room1].flipE == temp[room2].flipE && temp[room2].isHub == false && temp[room1].isHub == false)
+            n--;
+            int k = Random.Range(0, n);
+            Room r = temp[k];
+            if (CheckType(r, temp[n]))
             {
-                //AlignRooms();
-                if (room1 > room2)
-                {
-                    Debug.Log("Index1: " + room1);
-                    Debug.Log("Index2: " + room2);
-                    Swap1(temp, room2, room1);
-                    
-                }
-                else
-                {
-                    Debug.Log("EIndex1: " + room1);
-                    Debug.Log("EIndex2: " + room2);
-                    Swap(temp, room2, room1);
-                }
-               // AlignRooms();
+                Debug.Log("Swapped..");
+                temp[k] = temp[n];
+                temp[n] = r;
             }
-            else { Debug.Log("Iteration skipped");  continue; }
+            else { Debug.Log("Skipped"); continue; }
 
         }
+        
 
 
     }
 
-    public void Swap(IList<Room> temp1, int index, int index1)
-    {
-
-        
-
-        Room temp = temp1[index];
-        Room rtemp1 = temp1[index1];
-        foreach (Map m in gamemap.allmaps)
-        {
-            foreach (Room r in m.rooms)
-            {
-                if (r.GetInstanceID() == rtemp1.GetInstanceID()|| r.GetInstanceID() == temp.GetInstanceID())
-                {
-                    Debug.Log("Room found");
-                }
-            }
-        }
-        Vector3Int pos = temp1[index1].position;
-        int tempeo = temp1[index1].entranceoffset;
-        temp1[index] = temp1[index1];
-        temp1[index1] = temp;
-        temp1[index1].SetPosition(temp1[index].position);
-        temp1[index].SetPosition(pos);
-       // temp1[index1].entranceoffset = temp1[index].entranceoffset;
-       // temp1[index1].entranceoffset = tempeo;
-        
-        temp1[index].SetEntrance();
-        temp1[index].SetExit();
-        temp1[index1].SetEntrance();
-        temp1[index1].SetExit();
-        
-
-
-        // NewCoords(temp1[index], temp1[index1]);
-        // NewCoords(temp1[index1], temp1[index]);
-
-    }
-
-    public void Swap1(IList<Room> temp1, int index, int index1)
-    {
-        Room temp = temp1[index];
-        Room rtemp1 = temp1[index1];
-        Debug.Log("ID: " + temp1[0]);
-        Debug.Log(gamemap.allmaps[0].rooms[0]);
-        foreach (Map m in gamemap.allmaps)
-        {
-            foreach (Room r in m.rooms)
-            {
-                if (r.GetInstanceID() == rtemp1.GetInstanceID()|| r.GetInstanceID() == temp.GetInstanceID())
-                {
-                    Debug.Log("Room found");
-                }
-            }
-        }
-        Vector3Int pos = temp1[index].position;
-        int tempeo = temp1[index1].entranceoffset;
-        temp1[index] = temp1[index1];
-        temp1[index] = temp;
-        
-        // temp1[index1].entranceoffset = temp1[index].entranceoffset;
-        // temp1[index1].entranceoffset = tempeo;
-
-        temp1[index].SetEntrance();
-        temp1[index].SetExit();
-        temp1[index1].SetEntrance();
-        temp1[index1].SetExit();
-    }
 
     void GetRoomLayout()
     {
@@ -361,10 +257,25 @@ public class Shuffle : MonoBehaviour
 
     }
 
-    void AlignRooms()
+    void AlignRooms(Map clone)
     {
         int hbc = 0;
-        //clone.rooms[0].SetPosition(clone.anchorpoint);
+        Debug.Log("Anchor:" + clones[clone.map].rooms[clone.item].position.x + ", " + clones[clone.map].rooms[clone.item].position.y);
+        if (clone.isHubAdjacent == true)
+        {
+            if (clone.rooms[0].Type == Room.type.Right || clone.rooms[0].Type == Room.type.TopRight || clone.rooms[0].Type == Room.type.BottomRight)
+            {
+                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexits()[clone.exit].x + 1, clones[clone.map].rooms[clone.item].getexits()[clone.exit].y );
+                clone.rooms[0].SetEntrance();
+                clone.rooms[0].SetExit();
+            }
+            else if (clone.rooms[0].Type == Room.type.Left || clone.rooms[0].Type == Room.type.TopLeft || clone.rooms[0].Type == Room.type.BottomLeft)
+            {
+                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexits()[clone.exit].x - 1, clones[clone.map].rooms[clone.item].getexits()[clone.exit].y);
+                clone.rooms[0].SetEntrance();
+                clone.rooms[0].SetExit();
+            }
+        }
         for (int i = 0; i < clone.rooms.Count; i++)
         {
             if (i >= 1)
@@ -372,19 +283,16 @@ public class Shuffle : MonoBehaviour
                 
                 int indexA = i - 1;
                 int indexB = i;
-                if (clone.rooms[indexA] is HubRoom)
-                {
-                    hbc = clone.rooms[indexA].identifier;
-                }
+               
                 Debug.Log("HBC: " + hbc);
-                Align(clone.rooms, indexA, indexB,  clone.hubroomentrance[hbc]);
+                Align(clone.rooms, indexA, indexB);
                
                 Debug.Log((i - 1) + ": " + i);
                 
             }
 
         }
-
+        Debug.Log("Anchor:" + clones[clone.map].rooms[clone.item].position.x + ", " + clones[clone.map].rooms[clone.item].position.y);
         foreach (Room a in clone.rooms) {
             Debug.Log("Aligned Position $: " + a.position.x + ", " + a.position.y);
         }
@@ -400,33 +308,37 @@ public class Shuffle : MonoBehaviour
         foreach (Map map in gamemap.allmaps)
         {
             Debug.Log("Shuffle is executed...");
-            CopyMap(map);
-            ClearLists(clone);
-            SetAllEntrances(clone);
-            AlignRooms();
-            GetRoomLayout();
-            ClearRoomLayout();
-            //Swap(clone.rooms, 9, 2);
-            SetAllEntrances(clone);
-            Selection(clone.rooms);
-            //Swap(clone.rooms, 8, 2);
-            SetAllEntrances(clone);
-            AlignRooms();
-            clones.Add(clone);
-            SetRoomLayout();
+            //CopyMap(map);
+            
+            clones.Add(CopyMap(map));
+            
         }
-        Debug.Log(gamemap.allmaps[0].rooms[0].GetInstanceID() +", "+ gamemap.allmaps[1].rooms[0].GetInstanceID());
-        /* foreach (Room r in clone.rooms)
-         {
-             Debug.Log("Final Clone Position: " + r.position.x + ", " + r.position.y);
-         }
-         foreach (Room r in map.rooms)
-         {
-             Debug.Log("Final Original Position: " + r.position.x + ", " + r.position.y);
-         }*/
+        foreach (Map cl in clones)
+        {
+            ClearLists(cl);
+            SetAllEntrances(cl);
+            AlignRooms(cl);
+            //GetRoomLayout();
+            //ClearRoomLayout();
+            SetAllEntrances(cl);
+            Selection(cl.rooms);
+            SetAllEntrances(cl);
+            AlignRooms(cl);
+            //SetRoomLayout();
+        }
+        // Swap(clones[1].rooms, 0, 5 );
+        // SetAllEntrances(clones[1]);
+        // 
+        
 
-        // Debug.Log(places.Count);
-        // InitializeBounds(rooms.room[1]);
+        foreach (Map co in clones)
+        {
+            foreach (Room r in co.rooms)
+            {
+                Debug.Log(r);
+            }
+        }
+       
 
         Debug.Log("I'm still alive!!!");
     }

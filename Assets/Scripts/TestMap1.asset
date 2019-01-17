@@ -14,12 +14,9 @@ MonoBehaviour:
   rooms:
   - {fileID: 11400000, guid: 123e5aafd46407e41b693333e592abb5, type: 2}
   - {fileID: 11400000, guid: fb6d7a9080be5454f98210d34146048b, type: 2}
-  - {fileID: 11400000, guid: 730d52571fa7d2149b90c12a8ff2d04a, type: 2}
-  - {fileID: 11400000, guid: 9c1d4240455a9be4182a2d329ca75382, type: 2}
-  - {fileID: 11400000, guid: 98391276a5cd4e4469f7402b67f79b04, type: 2}
-  - {fileID: 11400000, guid: cfb1d11638d7de444b42e88e19781b07, type: 2}
-  - {fileID: 11400000, guid: e1d9ed562283d424ab5162aef8c846ca, type: 2}
-  - {fileID: 11400000, guid: 03d139bbc3dc14840bae2713cd82a292, type: 2}
-  - {fileID: 11400000, guid: 5f5a0267755ef2e4095133d4b4291b5d, type: 2}
   anchorpoint: {x: 0, y: 0, z: 0}
   hubroomentrance: 00000000
+  map: 0
+  item: 1
+  exit: 0
+  isHubAdjacent: 0

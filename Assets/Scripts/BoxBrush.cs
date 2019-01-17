@@ -26,7 +26,7 @@ namespace UnityEditor
                         {
                             Vector3Int pos = new Vector3Int(i, j, position.z);
                             base.Paint(grid, brushTarget, pos);
-
+                            
                         }
 
                     }

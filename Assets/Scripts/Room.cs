@@ -66,6 +66,11 @@ public class Room : ScriptableObject
         position = newpos;
     }
 
+    public Vector3Int GetPos()
+    {
+        return position;
+    }
+
     public void InitialiseLists() {
         if (hasStairs)
         {
