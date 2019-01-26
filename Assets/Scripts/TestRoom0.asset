@@ -14,7 +14,7 @@ MonoBehaviour:
   position: {x: 0, y: 0, z: 0}
   width: 30
   height: 10
-  Type: 1
+  Type: 6
   entranceoffset: 2
   entrancelength: 2
   flipE: 0

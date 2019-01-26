@@ -45,13 +45,7 @@ public class Shuffle : MonoBehaviour
             clone.rooms.Add(t);
         }
         return clone;
-        Debug.Log(clone.rooms.Count);
-        foreach (Room r in clone.rooms) {
-            Debug.Log("Position: " + r.position.x + ", " + r.position.y);
-        }
-        foreach (Room r in map.rooms) {
-            Debug.Log("Position: " + r.position.x + ", " + r.position.y);
-        }
+        
     }
 
     public Map GetClone() { return clone; }
@@ -124,15 +118,15 @@ public class Shuffle : MonoBehaviour
 
     public void Align(IList<Room> r, int indexA, int indexB)
     {
-        int hubroomc = 0;
+       
 
-        if (r[indexA].Type == Room.type.Right || r[indexA].Type == Room.type.TopRight || r[indexA].Type == Room.type.BottomRight)
+        if (r[indexA].Type == Room.type.Right || r[indexA].Type == Room.type.TopRight || r[indexA].Type == Room.type.BottomRight || (r[indexA].Type == Room.type.DeadEnd && !r[indexA].flipE))
         {
             
         r[indexB].SetTranslatePos(r[indexA].getexit().x + 1, r[indexA].getexit().y);
             
         }
-        else if (r[indexA].Type == Room.type.Left || r[indexA].Type == Room.type.TopLeft || r[indexA].Type == Room.type.BottomLeft)
+        else if (r[indexA].Type == Room.type.Left || r[indexA].Type == Room.type.TopLeft || r[indexA].Type == Room.type.BottomLeft || (r[indexA].Type == Room.type.DeadEnd && r[indexA].flipE))
         {
            
         r[indexB].SetTranslatePos(r[indexA].getexit().x - 1, r[indexA].getexit().y);
@@ -190,8 +184,13 @@ public class Shuffle : MonoBehaviour
     }
 
     bool CheckType(Room a, Room b) {
-        if ((a.Type == Room.type.Right || a.Type == Room.type.TopRight || a.Type == Room.type.BottomRight) 
-            && (b.Type == Room.type.Right || b.Type == Room.type.TopRight || b.Type == Room.type.BottomRight) && (a.isHub == false && b.isHub == false))
+        if ((a.Type == Room.type.Right || a.Type == Room.type.TopRight || a.Type == Room.type.BottomRight)
+            && (b.Type == Room.type.Right || b.Type == Room.type.TopRight || b.Type == Room.type.BottomRight) && (a.isHub == false && b.isHub == false) && (a.flipE == b.flipE))
+        {
+            return true;
+        }
+        else if ((a.Type == Room.type.Left || a.Type == Room.type.TopLeft || a.Type == Room.type.BottomLeft)
+            && (b.Type == Room.type.Left || b.Type == Room.type.TopLeft || b.Type == Room.type.BottomLeft) && (a.isHub == false && b.isHub == false) && (a.flipE == b.flipE))
         {
             return true;
         }
@@ -225,24 +224,24 @@ public class Shuffle : MonoBehaviour
     }
 
 
-    void GetRoomLayout()
+    void GetRoomLayout(Map m)
     {
-        foreach (Room r in clone.rooms) {
+        foreach (Room r in m.rooms) {
             GetCoords(r);
 
         }
     }
 
-    void ClearRoomLayout()
+    void ClearRoomLayout(Map m)
     {
-        foreach (Room r in clone.rooms) {
+        foreach (Room r in m.rooms) {
             ClearRoom(r);
         }
     }
 
-    void SetRoomLayout()
+    void SetRoomLayout(Map m)
     {
-        foreach (Room r in clone.rooms) {
+        foreach (Room r in m.rooms) {
             Replace(r);
         }
 
@@ -260,7 +259,7 @@ public class Shuffle : MonoBehaviour
     void AlignRooms(Map clone)
     {
         int hbc = 0;
-        Debug.Log("Anchor:" + clones[clone.map].rooms[clone.item].position.x + ", " + clones[clone.map].rooms[clone.item].position.y);
+        //Debug.Log("Anchor:" + clones[clone.map].rooms[clone.item].position.x + ", " + clones[clone.map].rooms[clone.item].position.y);
         if (clone.isHubAdjacent == true)
         {
             if (clone.rooms[0].Type == Room.type.Right || clone.rooms[0].Type == Room.type.TopRight || clone.rooms[0].Type == Room.type.BottomRight)
@@ -318,13 +317,13 @@ public class Shuffle : MonoBehaviour
             ClearLists(cl);
             SetAllEntrances(cl);
             AlignRooms(cl);
-            //GetRoomLayout();
-            //ClearRoomLayout();
+            GetRoomLayout(cl);
+            ClearRoomLayout(cl);
             SetAllEntrances(cl);
             Selection(cl.rooms);
             SetAllEntrances(cl);
             AlignRooms(cl);
-            //SetRoomLayout();
+            SetRoomLayout(cl);
         }
         // Swap(clones[1].rooms, 0, 5 );
         // SetAllEntrances(clones[1]);

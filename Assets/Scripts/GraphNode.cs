@@ -12,6 +12,7 @@ public class GraphNode  {
     public int nodeID = 0;
     public enum State {White, Grey, Black}
     public State state;
+    public GameObject g;
 
     public GraphNode(Room room)
     {
@@ -37,8 +38,14 @@ public class GraphNode  {
         return position;
     }
 
+    
+
     public List<GraphNode> getNeighbours()
     {
         return neighbours;
+    }
+
+    public GameObject GetGameObject() {
+        return g;
     }
 }

@@ -7,12 +7,18 @@ public class PlaceObjects : MonoBehaviour {
     List<GraphNode> items= new List<GraphNode>();
     DependencyTree tree;
     List<GraphNode> sorted = new List<GraphNode>();
+    List<GraphNode> active = new List<GraphNode>();
     public GameObject CollectableGem;
+
     void InitialiseNodes()
     {
-        foreach (Room r in map.GetClone().rooms)
+        map = GetComponent<Shuffle>();
+        for (int i = 0; i< map.getclones()[2].rooms.Count; i++)
         {
-            items.Add(new GraphNode(r));
+          
+            
+                items.Add(new GraphNode(map.getclones()[2].rooms[i]));
+            
         }
         tree = new DependencyTree(items);
     }
@@ -53,20 +59,84 @@ public class PlaceObjects : MonoBehaviour {
         sorted.Add(n);
 
     }
+    public void IsActive()
+    {
+        
+            if (!AreAllObjsActive())
+            {
+                QueueNodes();
+
+            }
+        
+
+    }
+
+    bool AreAllObjsActive()
+    {
+        for (int i = 0; i < active.Count; i++)
+        {
+            if (active[i].g.activeSelf == true)
+            {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void QueueNodes()
+    {
+        if (sorted.Count != 0)
+        {
+            active.Clear();
+            bool PickDep = (Random.value > 0.5);
+            if (PickDep)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    active.Add(sorted[i]);
+                    sorted.RemoveAt(i);
+                }
+                
+            }
+            else
+            {
+                active.Add(sorted[0]);
+                sorted.RemoveAt(0);
+            }
+           for (int i = 0; i< active.Count; i++)
+            {
+               active[i].g = Instantiate(CollectableGem, active[i].Place(), Quaternion.identity);
+            }
+
+        }
+
+    }
 	// Use this for initialization
 	void Start () {
         map= GetComponent<Shuffle>();
         InitialiseNodes();
         Dependencies();
         Sort();
-        foreach (GraphNode n in sorted) {
+        QueueNodes();
+        /*foreach (GraphNode n in sorted) {
             Debug.Log("Node:"+ n.nodeID);
-            GameObject g = Instantiate(CollectableGem, n.Place(), Quaternion.identity);
-        }
+            
+            
+                n.g = Instantiate(CollectableGem, n.Place(), Quaternion.identity);
+            
+            Debug.Log("Node: " + n.nodeID + ": " + n.g.activeSelf);
+        }*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        IsActive();
+        //Check if nodes in active array have active objects
+        //If yes break, if not remove from active array
+        //check if active array empty
+        //if yes load the the next level of nodes to be instantiated.
+
 		
 	}
 }

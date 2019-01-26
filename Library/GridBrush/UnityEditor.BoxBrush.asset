@@ -33,8 +33,8 @@ MonoBehaviour:
     m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Size: {x: 1, y: 1, z: 1}
   m_Pivot: {x: 0, y: 0, z: 0}
-  boxpos: {x: -6, y: -52, z: 0}
-  isActive: 0
+  boxpos: {x: 70, y: -1, z: 0}
+  isActive: 1
   width: 21
   height: 14
-  r: {fileID: 11400000, guid: 673aa76b62cf0704d815cbcb60a7b924, type: 2}
+  r: {fileID: 11400000, guid: e8513b840efac884e9d3c1d6f3240bf6, type: 2}

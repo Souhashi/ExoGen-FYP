@@ -9,6 +9,7 @@ public class Room : ScriptableObject
 {
 
     public Vector3Int position;
+    public Vector3Int anchor;
     protected Vector3Int entrance;
     Vector3Int exit;
     public int width;
