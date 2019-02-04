@@ -64,6 +64,15 @@ public class PhysicsObject : MonoBehaviour {
         Movement (move, true);
     }
 
+    bool CheckIfInside(Vector2 move,  RaycastHit2D rh)
+    {
+        if (rh.collider.bounds.Contains(move))
+        {
+            return true;
+        }
+        return false;
+    }
+
     void Movement(Vector2 move, bool yMovement)
     {
         float distance = move.magnitude;

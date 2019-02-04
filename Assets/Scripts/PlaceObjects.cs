@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+
 
 public class PlaceObjects : MonoBehaviour {
     Shuffle map;
@@ -8,26 +10,67 @@ public class PlaceObjects : MonoBehaviour {
     DependencyTree tree;
     List<GraphNode> sorted = new List<GraphNode>();
     List<GraphNode> active = new List<GraphNode>();
+    int[] nodes;
     public GameObject CollectableGem;
 
     void InitialiseNodes()
     {
         map = GetComponent<Shuffle>();
-        for (int i = 0; i< map.getclones()[2].rooms.Count; i++)
+        for (int i = 0; i < map.getclones().Count; i++)
         {
-          
-            
-                items.Add(new GraphNode(map.getclones()[2].rooms[i]));
-            
+            for (int j = 0; j < map.getclones()[i].rooms.Count; j++)
+            {
+
+                items.Add(new GraphNode(map.getclones()[i].rooms[j]));
+
+            }
         }
         tree = new DependencyTree(items);
     }
 
+    void GenerateNodes()
+    {
+        nodes = new int[items.Count];
+        for (int i = 0; i < nodes.Length; i++) { nodes[i] = i; }
+    }
+
+    int GenerateRandom(int lastnumber)
+    {
+        int rotate = Random.Range(0, items.Count-1);
+        return (lastnumber + rotate) % items.Count;
+
+    }
+    //https://stackoverflow.com/questions/12790337/generating-a-random-dag
     void Dependencies()
     {
-        tree.AddDependency(tree.getNodes()[0], tree.getNodes()[2]);
-        tree.AddDependency(tree.getNodes()[2], tree.getNodes()[1]);
-        tree.AddDependency(tree.getNodes()[0], tree.getNodes()[4]);
+        StreamWriter writer = new StreamWriter("Test.txt", true);
+        int ranks = items.Count;
+        int max_per_rank = 3;
+        int min_per_rank = 1;
+        int chance = 30;
+        int nodes = 0;
+        writer.WriteLine("digraph G {");
+        for (int i = 0; i < ranks; i++)
+        {
+            int new_nodes = Random.Range(min_per_rank, max_per_rank);
+
+            for (int j = 0; j < nodes; j++)
+            {
+                for (int k = 0; k < new_nodes; k++)
+                {
+                    if (Random.Range(0, 100) < chance)
+                    {
+                        if (k + nodes >= items.Count || j >= items.Count) { continue; }
+                        Debug.Log("From " + j +" " +"To " + (k + nodes));
+                        tree.AddDependency(tree.getNodes()[j], tree.getNodes()[k + nodes]);
+                        writer.WriteLine(j+" " + "->" +" "+ (k + nodes)+";");
+                    }
+                }
+            }
+            nodes += new_nodes;
+        }
+        writer.WriteLine("}");
+        writer.Close();
     }
 
     public void Sort()
@@ -90,25 +133,32 @@ public class PlaceObjects : MonoBehaviour {
         {
             active.Clear();
             bool PickDep = (Random.value > 0.5);
-            if (PickDep)
+            int numitems = Random.Range(1, 3);
+            if (PickDep && sorted.Count > numitems)
             {
-                for (int i = 0; i < 2; i++)
+                
+                for (int i = 0; i < numitems; i++)
                 {
                     active.Add(sorted[i]);
                     sorted.RemoveAt(i);
                 }
-                
+
             }
             else
             {
                 active.Add(sorted[0]);
                 sorted.RemoveAt(0);
             }
-           for (int i = 0; i< active.Count; i++)
+            for (int i = 0; i < active.Count; i++)
             {
-               active[i].g = Instantiate(CollectableGem, active[i].Place(), Quaternion.identity);
+                active[i].g = Instantiate(CollectableGem, active[i].Place(), Quaternion.identity);
             }
 
+
+        }
+        else
+        {
+            return;
         }
 
     }
@@ -119,14 +169,12 @@ public class PlaceObjects : MonoBehaviour {
         Dependencies();
         Sort();
         QueueNodes();
-        /*foreach (GraphNode n in sorted) {
+        foreach (GraphNode n in sorted) {
             Debug.Log("Node:"+ n.nodeID);
             
             
-                n.g = Instantiate(CollectableGem, n.Place(), Quaternion.identity);
-            
-            Debug.Log("Node: " + n.nodeID + ": " + n.g.activeSelf);
-        }*/
+              
+        }
 	}
 	
 	// Update is called once per frame
