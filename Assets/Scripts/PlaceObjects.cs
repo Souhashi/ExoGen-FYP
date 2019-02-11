@@ -15,6 +15,7 @@ public class PlaceObjects : MonoBehaviour {
 
     void InitialiseNodes()
     {
+        active.Clear();
         map = GetComponent<Shuffle>();
         for (int i = 0; i < map.getclones().Count; i++)
         {
@@ -32,6 +33,66 @@ public class PlaceObjects : MonoBehaviour {
     {
         nodes = new int[items.Count];
         for (int i = 0; i < nodes.Length; i++) { nodes[i] = i; }
+    }
+
+    public GraphNode PickNode()
+    {
+        int index = Random.Range(0, tree.getNodes().Count);
+        return tree.getNodes()[index];
+        
+    }
+
+    public bool CheckIfLive()
+    {
+        for (int i = 0; i < tree.getNodes().Count; i++)
+        {
+            if (tree.getNodes()[i].g == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void LoadNodes()
+    {
+        GraphNode currentNode;
+        if (active.Count == 0)
+        {
+            currentNode = PickNode();
+            if (currentNode.g == null)
+            {
+                currentNode.g = Instantiate(CollectableGem, currentNode.Place(), Quaternion.identity);
+            }
+            active.Add(currentNode);
+        }
+        else if (active.Count != 0)
+        {
+            if (active[0].getNeighbours().Count != 0 && active[0].g.activeSelf == false)
+            {
+                currentNode = active[0].getRandomNode();
+                if (currentNode.g == null)
+                {
+                    currentNode.g = Instantiate(CollectableGem, currentNode.Place(), Quaternion.identity);
+
+                }
+                active.Add(currentNode);
+                active.RemoveAt(0);
+            }
+            else if (active[0].getNeighbours().Count == 0)
+            {
+                currentNode = PickNode();
+                if (currentNode.g == null)
+                {
+                    currentNode.g = Instantiate(CollectableGem, currentNode.Place(), Quaternion.identity);
+
+                }
+                active.Add(currentNode);
+                active.RemoveAt(0);
+
+            }
+
+        }
     }
 
     int GenerateRandom(int lastnumber)
@@ -105,14 +166,17 @@ public class PlaceObjects : MonoBehaviour {
     public void IsActive()
     {
         
-            if (!AreAllObjsActive())
+            if (AreAllObjsActive()==false && CheckIfLive() == true)
             {
-                QueueNodes();
+               LoadNodes();
+            //if node has dependencies, move to one of its neighbours
+            //if not, pick a different one
 
             }
         
 
     }
+
 
     bool AreAllObjsActive()
     {
@@ -126,6 +190,8 @@ public class PlaceObjects : MonoBehaviour {
         }
         return false;
     }
+
+    
 
     public void QueueNodes()
     {
@@ -168,7 +234,7 @@ public class PlaceObjects : MonoBehaviour {
         InitialiseNodes();
         Dependencies();
         Sort();
-        QueueNodes();
+        LoadNodes();
         foreach (GraphNode n in sorted) {
             Debug.Log("Node:"+ n.nodeID);
             

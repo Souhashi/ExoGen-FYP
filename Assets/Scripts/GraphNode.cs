@@ -48,4 +48,10 @@ public class GraphNode  {
     public GameObject GetGameObject() {
         return g;
     }
+
+    public GraphNode getRandomNode()
+    {
+        int index = Random.Range(0, neighbours.Count);
+        return neighbours[index];
+    }
 }
