@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: HB1
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
+  anchor: {x: 30, y: -1, z: 0}
   width: 40
   height: 30
   Type: 1

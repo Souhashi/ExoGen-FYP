@@ -12,12 +12,14 @@ public class CreateRoom : MonoBehaviour
     //public Map map;
 
     public Shuffle shuffle;
+    public GenerateDoors gd;
 
     // Use this for initialization
     void Start()
     {
 
         shuffle = GetComponent<Shuffle>();
+        gd = currentTilemap.GetComponent<GenerateDoors>();
         // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
         Debug.Log("Map size: " + shuffle.getclones().Count);
         // shuffle.Swap(map.rooms,  0, 5);
@@ -25,7 +27,7 @@ public class CreateRoom : MonoBehaviour
             foreach (Room r in m.rooms)
             {
                 //Debug.Log("x: "+ r.position.x +"y: "+ r.position.y + "w: "+ r.width + "h:"+ r.height);
-                int i = 0;
+                
                 createRoom(r);
                 if (r is HubRoom)
                 {
@@ -36,19 +38,16 @@ public class CreateRoom : MonoBehaviour
                     CreateEntrances(r);
                 }
             }
-            // Debug.Log("Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
-            // Debug.Log("Exit: " + r.getexit().x + ", " + r.getexit().y);
-            //Debug.Log("Position: " + r.position.x + ", " + r.position.y);
-           // Debug.Log("Room:" + i + " Entrance: " + r.getentrance().x + ", " + r.getentrance().y);
-           // Debug.Log("Room:" + i + " Exit: " + r.getexit().x + ", " + r.getexit().y);
-           // r.SetTranslatePos(r.getentrance().x, r.getentrance().y);
-          // Debug.Log("Room:"+i+" List: " + r.GetOffset().Count );
-           // i++;
+            
+            
             
 
         }
-       // map.rooms[0].SetTranslatePos(map.rooms[0].getentrance().x +1, map.rooms[0].getentrance().y);
-       // Debug.Log("Position: " + map.rooms[0].position.x + ", " + map.rooms[0].position.y);
+        gd.CreateBarriers();
+        // map.rooms[0].SetTranslatePos(map.rooms[0].getentrance().x +1, map.rooms[0].getentrance().y);
+        // Debug.Log("Position: " + map.rooms[0].position.x + ", " + map.rooms[0].position.y);
+        gd.GenerateKeys();
+        gd.PlaceKeys();
     }
 
     // Update is called once per frame

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: TMTR1
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
+  anchor: {x: 95, y: -1, z: 0}
   width: 15
   height: 20
   Type: 5

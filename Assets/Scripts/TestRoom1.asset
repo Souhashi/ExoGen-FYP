@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: TestRoom1
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
+  anchor: {x: 70, y: -1, z: 0}
   width: 15
   height: 10
   Type: 1

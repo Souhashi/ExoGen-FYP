@@ -58,9 +58,9 @@ public class Shuffle : MonoBehaviour
         {
             r.InitialiseLists();
         }
-            for (int x = r.position.x; x <= r.position.x + r.width-1; x++)
+            for (int x = r.anchor.x; x <= r.anchor.x + r.width-1; x++)
         {
-            for (int y = r.position.y; y <= r.position.y + r.height-1; y++)
+            for (int y = r.anchor.y; y <= r.anchor.y + r.height-1; y++)
             {
                 position = new Vector3Int(x, y, 0);
                 stairposition = new Vector3Int(x, y, 0);
@@ -69,7 +69,7 @@ public class Shuffle : MonoBehaviour
                     r.GetPosition().Add(position);
                     r.GetTiles().Add(layout.GetTile(position));
                     r.GetTransform().Add(layout.GetTransformMatrix(position));
-                    r.GetOffset().Add(new Vector3Int(x - r.position.x, y - r.position.y, 0));
+                    r.GetOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
                     
 
                 }
@@ -81,7 +81,7 @@ public class Shuffle : MonoBehaviour
                         r.GetStairPosition().Add(stairposition);
                         r.GetStairTiles().Add(stairs.GetTile(stairposition));
                         r.GetStairTransform().Add(stairs.GetTransformMatrix(stairposition));
-                        r.GetStairOffset().Add(new Vector3Int(x - r.position.x, y - r.position.y, 0));
+                        r.GetStairOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
                     }
 
                 }
@@ -98,9 +98,9 @@ public class Shuffle : MonoBehaviour
     void ClearRoom(Room r)
     {
         Vector3Int position, stairposition;
-        for (int x = r.position.x; x < r.position.x + r.width; x++)
+        for (int x = r.anchor.x; x < r.anchor.x + r.width; x++)
         {
-            for (int y = r.position.y; y < r.position.y + r.height; y++)
+            for (int y = r.anchor.y; y < r.anchor.y + r.height; y++)
             {
                 position = new Vector3Int(x, y, 0);
                 stairposition = new Vector3Int(x, y, 0);

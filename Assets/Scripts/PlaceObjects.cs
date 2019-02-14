@@ -12,6 +12,7 @@ public class PlaceObjects : MonoBehaviour {
     List<GraphNode> active = new List<GraphNode>();
     int[] nodes;
     public GameObject CollectableGem;
+    GraphNode currentNode;
 
     void InitialiseNodes()
     {
@@ -25,7 +26,7 @@ public class PlaceObjects : MonoBehaviour {
                 items.Add(new GraphNode(map.getclones()[i].rooms[j]));
 
             }
-        }
+       }
         tree = new DependencyTree(items);
     }
 
@@ -56,7 +57,7 @@ public class PlaceObjects : MonoBehaviour {
 
     public void LoadNodes()
     {
-        GraphNode currentNode;
+        
         if (active.Count == 0)
         {
             currentNode = PickNode();
@@ -78,6 +79,7 @@ public class PlaceObjects : MonoBehaviour {
                 }
                 active.Add(currentNode);
                 active.RemoveAt(0);
+                Debug.Log("Neighbour picked...");
             }
             else if (active[0].getNeighbours().Count == 0)
             {
@@ -89,7 +91,7 @@ public class PlaceObjects : MonoBehaviour {
                 }
                 active.Add(currentNode);
                 active.RemoveAt(0);
-
+                Debug.Log("New node picked...");
             }
 
         }

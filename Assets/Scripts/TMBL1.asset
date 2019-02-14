@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: TMBL1
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
+  anchor: {x: 160, y: -2, z: 0}
   width: 15
-  height: 40
+  height: 30
   Type: 4
   entranceoffset: 2
   entrancelength: 2

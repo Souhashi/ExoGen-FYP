@@ -124,10 +124,13 @@
     <Compile Include="Assets\Scripts\CreateBackground.cs" />
     <Compile Include="Assets\Scripts\CreateRoom.cs" />
     <Compile Include="Assets\Scripts\DependencyTree.cs" />
+    <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\GameMap.cs" />
+    <Compile Include="Assets\Scripts\GenerateDoors.cs" />
     <Compile Include="Assets\Scripts\Generator.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
     <Compile Include="Assets\Scripts\HubRoom.cs" />
+    <Compile Include="Assets\Scripts\Key.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\PlaceObjects.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
