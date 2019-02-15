@@ -26832,7 +26832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walls: {fileID: 650454234}
   shuffle: {fileID: 0}
-  tile: {fileID: 11400000, guid: 8e0ee198a7ae86e4aa39ac75a52555cf, type: 2}
+  tile: {fileID: 11400000, guid: 01e7640e99ab342d2bee5b21a7d87ece, type: 2}
   CollectableGem: {fileID: 1764816090862790, guid: 75cabef8c622f42229b80fec978c6a10,
     type: 2}
 --- !u!1 &753205389

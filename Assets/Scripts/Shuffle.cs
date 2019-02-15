@@ -264,13 +264,30 @@ public class Shuffle : MonoBehaviour
         {
             if (clone.rooms[0].Type == Room.type.Right || clone.rooms[0].Type == Room.type.TopRight || clone.rooms[0].Type == Room.type.BottomRight)
             {
-                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexits()[clone.exit].x + 1, clones[clone.map].rooms[clone.item].getexits()[clone.exit].y );
+                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexits()[clone.exit].x + 1, clones[clone.map].rooms[clone.item].getexits()[clone.exit].y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
             }
             else if (clone.rooms[0].Type == Room.type.Left || clone.rooms[0].Type == Room.type.TopLeft || clone.rooms[0].Type == Room.type.BottomLeft)
             {
                 clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexits()[clone.exit].x - 1, clones[clone.map].rooms[clone.item].getexits()[clone.exit].y);
+                clone.rooms[0].SetEntrance();
+                clone.rooms[0].SetExit();
+            }
+        }
+        else if (clone.isRoute == true && clone.isHubAdjacent == false)
+        {
+            if (clone.rooms[0].Type == Room.type.Right || clone.rooms[0].Type == Room.type.TopRight || clone.rooms[0].Type == Room.type.BottomRight || 
+                (clone.rooms[0].Type == Room.type.DeadEnd && clone.rooms[0].flipE == true))
+            {
+                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexit().x + 1, clones[clone.map].rooms[clone.item].getexit().y);
+                clone.rooms[0].SetEntrance();
+                clone.rooms[0].SetExit();
+            }
+            else if (clone.rooms[0].Type == Room.type.Left || clone.rooms[0].Type == Room.type.TopLeft || clone.rooms[0].Type == Room.type.BottomLeft|| 
+                (clone.rooms[0].Type == Room.type.DeadEnd && clone.rooms[0].flipE == false))
+            {
+                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexit().x - 1, clones[clone.map].rooms[clone.item].getexit().y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
             }

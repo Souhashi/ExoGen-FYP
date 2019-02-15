@@ -9,4 +9,5 @@ public class Map : ScriptableObject {
        
     public int map, item, exit;
     public bool isHubAdjacent;
+    public bool isRoute;
 }

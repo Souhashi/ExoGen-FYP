@@ -26,6 +26,7 @@ public class Door  {
         {
             Vector3Int pos = new Vector3Int(place, i, 0);
             t.SetTile(pos, r);
+            
         }
         Debug.Log(place + ", " + map + ", " + length + ", " + offset);
     }
