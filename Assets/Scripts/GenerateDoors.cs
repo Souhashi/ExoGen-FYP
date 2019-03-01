@@ -11,13 +11,14 @@ public class GenerateDoors : MonoBehaviour {
     List<Door> doors = new List<Door>();
     List<Key> keys = new List<Key>();
     public GameObject CollectableGem;
+    
 
     void InitialiseDoors()
     {
         shuffle = GetComponent<Shuffle>();
         for (int i = 1; i < shuffle.getclones().Count; i++)
         {
-            bool chance = (Random.value > 0.5);
+            bool chance = true;//(Random.value > 0.5);
             if (chance) { 
 
 
@@ -25,6 +26,7 @@ public class GenerateDoors : MonoBehaviour {
             }
         }
         Debug.Log(doors.Count);
+       
 
     }
 
@@ -101,8 +103,13 @@ public class GenerateDoors : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Wooohoooo");
+    }
+
+    // Use this for initialization
+    void Start () {
         //  InitialiseDoors();
         //  DrawDoors();
        // GenerateKeys();

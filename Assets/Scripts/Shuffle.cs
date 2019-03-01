@@ -347,13 +347,7 @@ public class Shuffle : MonoBehaviour
         // 
         
 
-        foreach (Map co in clones)
-        {
-            foreach (Room r in co.rooms)
-            {
-                Debug.Log(r);
-            }
-        }
+         
        
 
         Debug.Log("I'm still alive!!!");

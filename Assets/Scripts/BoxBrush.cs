@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+using UnityEditor;
+#if UNITY_EDITOR
 namespace UnityEditor
 {
     [CustomGridBrush(true, false, false, "Box Brush")]
@@ -111,3 +112,4 @@ namespace UnityEditor
 
     }
 }
+#endif

@@ -106,7 +106,7 @@ public class PlaceObjects : MonoBehaviour {
     //https://stackoverflow.com/questions/12790337/generating-a-random-dag
     void Dependencies()
     {
-        StreamWriter writer = new StreamWriter("Test.txt", true);
+        StreamWriter writer = new StreamWriter("Test.txt", false);
         int ranks = items.Count;
         int max_per_rank = 3;
         int min_per_rank = 1;

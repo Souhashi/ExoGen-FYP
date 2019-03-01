@@ -94,6 +94,13 @@ public class Room : ScriptableObject
         stairposition.Clear();
     }
 
+    public bool Contains(Room room)
+    {
+        return (position.x <= room.position.x + room.width &&
+            position.x + width >= room.position.x && position.y <= room.position.y + room.height &&
+            position.y + height >= room.position.y);
+    }
+
     public void SetEntrance()
     {
         switch (Type)
@@ -225,6 +232,11 @@ public class Room : ScriptableObject
 
         }
 
+    }
+
+    public string SaveToString()
+    {
+        return JsonUtility.ToJson(this);
     }
 
     public void SetTranslatePos(int x, int y)
