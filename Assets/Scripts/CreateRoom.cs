@@ -21,9 +21,9 @@ public class CreateRoom : MonoBehaviour
         shuffle = GetComponent<Shuffle>();
         gd = currentTilemap.GetComponent<GenerateDoors>();
         // shuffle.AlignX(map.rooms, map.rooms.Count - 2, map.rooms.Count - -1);
-        Debug.Log("Map size: " + shuffle.getclones().Count);
+        
         // shuffle.Swap(map.rooms,  0, 5);
-        foreach (Map m in shuffle.getclones()) {
+       foreach (Map m in shuffle.gamemap.GameLevel.allmaps) {
             foreach (Room r in m.rooms)
             {
                 //Debug.Log("x: "+ r.position.x +"y: "+ r.position.y + "w: "+ r.width + "h:"+ r.height);
@@ -44,10 +44,10 @@ public class CreateRoom : MonoBehaviour
 
         }
         gd.CreateBarriers();
-        // map.rooms[0].SetTranslatePos(map.rooms[0].getentrance().x +1, map.rooms[0].getentrance().y);
+     // map.rooms[0].SetTranslatePos(map.rooms[0].getentrance().x +1, map.rooms[0].getentrance().y);
         // Debug.Log("Position: " + map.rooms[0].position.x + ", " + map.rooms[0].position.y);
-        gd.GenerateKeys();
-        gd.PlaceKeys();
+       gd.GenerateKeys();
+       gd.PlaceKeys();
     }
 
     // Update is called once per frame

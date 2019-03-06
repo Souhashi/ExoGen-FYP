@@ -26467,7 +26467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cbf89cf26bf5f45911a0d84815500a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms: []
   tilemap: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
@@ -26571,7 +26570,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.000004, y: 1.9999993, z: -9}
+  m_LocalPosition: {x: 10.000003, y: 1.9999993, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -26589,6 +26588,7 @@ GameObject:
   - component: {fileID: 650454233}
   - component: {fileID: 650454232}
   - component: {fileID: 650454231}
+  - component: {fileID: 650454240}
   - component: {fileID: 650454237}
   - component: {fileID: 650454236}
   - component: {fileID: 650454235}
@@ -26625,11 +26625,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbbfa1eb9a2dd245972785fe19d4e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 11400000, guid: 4bee39685d480164d8efeea17bd8ca9f, type: 2}
   stairs: {fileID: 1143756404}
   tilemap: {fileID: 650454234}
   layout: {fileID: 753205392}
-  gamemap: {fileID: 11400000, guid: 2d797eca4ed166f47a6a80fc5a5b3fd4, type: 2}
+  gamemap: {fileID: 0}
 --- !u!114 &650454232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26757,7 +26756,7 @@ CompositeCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 650454229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -26835,6 +26834,17 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: 01e7640e99ab342d2bee5b21a7d87ece, type: 2}
   CollectableGem: {fileID: 1764816090862790, guid: 75cabef8c622f42229b80fec978c6a10,
     type: 2}
+--- !u!114 &650454240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650454229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d2de4a8cda782449f4cc7b8786ba81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &753205389
 GameObject:
   m_ObjectHideFlags: 0
@@ -67346,7 +67356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbbfa1eb9a2dd245972785fe19d4e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 11400000, guid: 5a5e33428f118d544a946cd38c616516, type: 2}
   stairs: {fileID: 765058874}
   tilemap: {fileID: 1171563544}
   layout: {fileID: 2100484446}
@@ -67465,7 +67474,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582423501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.000004, y: 1.9999993, z: -9}
+  m_LocalPosition: {x: 10.000003, y: 1.9999993, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 219311968}

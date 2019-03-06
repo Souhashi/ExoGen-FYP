@@ -13,16 +13,17 @@ public class GenerateDoors : MonoBehaviour {
     public GameObject CollectableGem;
     
 
-    void InitialiseDoors()
+void InitialiseDoors()
     {
         shuffle = GetComponent<Shuffle>();
-        for (int i = 1; i < shuffle.getclones().Count; i++)
+        for (int i = 1; i < shuffle.gamemap.GameLevel.allmaps.Count; i++)
         {
             bool chance = true;//(Random.value > 0.5);
             if (chance) { 
 
 
-                doors.Add(new Door(shuffle.getclones()[i].rooms[0].getentrance().x, i, shuffle.getclones()[i].rooms[0].entrancelength, shuffle.getclones()[i].rooms[0].getentrance().y+1));
+                doors.Add(new Door(shuffle.gamemap.GameLevel.allmaps[i].rooms[0].getentrance().x, i, shuffle.gamemap.GameLevel.allmaps[i].rooms[0].entrancelength, 
+                    shuffle.gamemap.GameLevel.allmaps[i].rooms[0].getentrance().y+1));
             }
         }
         Debug.Log(doors.Count);
@@ -40,7 +41,7 @@ public class GenerateDoors : MonoBehaviour {
 
     public void CreateBarriers()
     {
-        InitialiseDoors();
+       InitialiseDoors();
         DrawDoors();
     }
 
@@ -51,7 +52,7 @@ public class GenerateDoors : MonoBehaviour {
             for (int i = 0; i < doors.Count; i++)
             {
                 int mapindex = Random.Range(0, doors[i].getMap());
-                Room r = shuffle.getclones()[mapindex].rooms[Random.Range(0, shuffle.getclones()[mapindex].rooms.Count)];
+             Room r = shuffle.gamemap.GameLevel.allmaps[mapindex].rooms[Random.Range(0, shuffle.gamemap.GameLevel.allmaps[mapindex].rooms.Count)];
                 Key k = new Key(i);
                 k.setRoom(r);
                 keys.Add(k);

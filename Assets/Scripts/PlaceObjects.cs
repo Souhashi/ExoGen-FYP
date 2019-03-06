@@ -16,18 +16,18 @@ public class PlaceObjects : MonoBehaviour {
 
     void InitialiseNodes()
     {
-        active.Clear();
+       active.Clear();
         map = GetComponent<Shuffle>();
-        for (int i = 0; i < map.getclones().Count; i++)
+        for (int i = 0; i < map.gamemap.GameLevel.allmaps.Count; i++)
         {
-            for (int j = 0; j < map.getclones()[i].rooms.Count; j++)
+            for (int j = 0; j < map.gamemap.GameLevel.allmaps[i].rooms.Count; j++)
             {
 
-                items.Add(new GraphNode(map.getclones()[i].rooms[j]));
+                items.Add(new GraphNode(map.gamemap.GameLevel.allmaps[i].rooms[j]));
 
             }
        }
-        tree = new DependencyTree(items);
+       tree = new DependencyTree(items);
     }
 
     void GenerateNodes()

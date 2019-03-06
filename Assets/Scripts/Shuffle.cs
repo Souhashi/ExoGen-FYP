@@ -11,7 +11,7 @@ public class Shuffle : MonoBehaviour
     public Tilemap stairs;
     public Tilemap tilemap;
     public Tilemap layout;
-    public GameMap gamemap;
+    public MapLoader gamemap;
     List<Map> clones = new List<Map>();
     Map clone;
     
@@ -22,7 +22,7 @@ public class Shuffle : MonoBehaviour
 
     public void ClearLists(Map m)
     {
-        foreach (Room r in map.rooms)
+        foreach (Room r in m.rooms)
         {
             r.ClearLists();
         }
@@ -33,7 +33,7 @@ public class Shuffle : MonoBehaviour
         return clones;
     }
 
-    Map CopyMap(Map m)
+   /* Map CopyMap(Map m)
     {
         clone = null;
         clone = Object.Instantiate(m) as Map;
@@ -46,47 +46,52 @@ public class Shuffle : MonoBehaviour
         }
         return clone;
         
-    }
+    }*/
 
     public Map GetClone() { return clone; }
 
     void GetCoords(Room r)
     {
+        Debug.Log("A"+r.anchor.ToString()+r.width+", "+r.height);
         r.GetPosition().Clear();
         Vector3Int position, stairposition;
         if (r.hasStairs)
         {
             r.InitialiseLists();
         }
-            for (int x = r.anchor.x; x <= r.anchor.x + r.width-1; x++)
+        if (r.anchor != Vector3Int.zero)
         {
-            for (int y = r.anchor.y; y <= r.anchor.y + r.height-1; y++)
+
+            for (int x = r.anchor.x; x <= r.anchor.x + r.width - 1; x++)
             {
-                position = new Vector3Int(x, y, 0);
-                stairposition = new Vector3Int(x, y, 0);
-                if (layout.HasTile(position))
+                for (int y = r.anchor.y; y <= r.anchor.y + r.height - 1; y++)
                 {
-                    r.GetPosition().Add(position);
-                    r.GetTiles().Add(layout.GetTile(position));
-                    r.GetTransform().Add(layout.GetTransformMatrix(position));
-                    r.GetOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
-                    
-
-                }
-                if (r.hasStairs)
-                {
-
-                    if (stairs.HasTile(stairposition))
+                    position = new Vector3Int(x, y, 0);
+                    stairposition = new Vector3Int(x, y, 0);
+                    if (layout.HasTile(position))
                     {
-                        r.GetStairPosition().Add(stairposition);
-                        r.GetStairTiles().Add(stairs.GetTile(stairposition));
-                        r.GetStairTransform().Add(stairs.GetTransformMatrix(stairposition));
-                        r.GetStairOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
+                        r.GetPosition().Add(position);
+                        r.GetTiles().Add(layout.GetTile(position));
+                        r.GetTransform().Add(layout.GetTransformMatrix(position));
+                        r.GetOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
+
+
                     }
+                    if (r.hasStairs)
+                    {
 
+                        if (stairs.HasTile(stairposition))
+                        {
+                            r.GetStairPosition().Add(stairposition);
+                            r.GetStairTiles().Add(stairs.GetTile(stairposition));
+                            r.GetStairTransform().Add(stairs.GetTransformMatrix(stairposition));
+                            r.GetStairOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
+                        }
+
+                    }
                 }
-            }
 
+            }
         }
 
         Debug.Log("Tiles loaded: "+r.GetPosition().Count);
@@ -262,15 +267,19 @@ public class Shuffle : MonoBehaviour
         //Debug.Log("Anchor:" + clones[clone.map].rooms[clone.item].position.x + ", " + clones[clone.map].rooms[clone.item].position.y);
         if (clone.isHubAdjacent == true)
         {
+            Debug.Log(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits().Count);
+
+
             if (clone.rooms[0].Type == Room.type.Right || clone.rooms[0].Type == Room.type.TopRight || clone.rooms[0].Type == Room.type.BottomRight)
             {
-                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexits()[clone.exit].x + 1, clones[clone.map].rooms[clone.item].getexits()[clone.exit].y);
+                clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].x + 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
             }
             else if (clone.rooms[0].Type == Room.type.Left || clone.rooms[0].Type == Room.type.TopLeft || clone.rooms[0].Type == Room.type.BottomLeft)
             {
-                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexits()[clone.exit].x - 1, clones[clone.map].rooms[clone.item].getexits()[clone.exit].y);
+                
+                clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].x - 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
             }
@@ -280,14 +289,14 @@ public class Shuffle : MonoBehaviour
             if (clone.rooms[0].Type == Room.type.Right || clone.rooms[0].Type == Room.type.TopRight || clone.rooms[0].Type == Room.type.BottomRight || 
                 (clone.rooms[0].Type == Room.type.DeadEnd && clone.rooms[0].flipE == true))
             {
-                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexit().x + 1, clones[clone.map].rooms[clone.item].getexit().y);
+                clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().x + 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
             }
             else if (clone.rooms[0].Type == Room.type.Left || clone.rooms[0].Type == Room.type.TopLeft || clone.rooms[0].Type == Room.type.BottomLeft|| 
                 (clone.rooms[0].Type == Room.type.DeadEnd && clone.rooms[0].flipE == false))
             {
-                clone.rooms[0].SetTranslatePos(clones[clone.map].rooms[clone.item].getexit().x - 1, clones[clone.map].rooms[clone.item].getexit().y);
+                clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().x - 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
             }
@@ -308,7 +317,7 @@ public class Shuffle : MonoBehaviour
             }
 
         }
-        Debug.Log("Anchor:" + clones[clone.map].rooms[clone.item].position.x + ", " + clones[clone.map].rooms[clone.item].position.y);
+     //   Debug.Log("Anchor:" + clones[clone.map].rooms[clone.item].position.x + ", " + clones[clone.map].rooms[clone.item].position.y);
         foreach (Room a in clone.rooms) {
             Debug.Log("Aligned Position $: " + a.position.x + ", " + a.position.y);
         }
@@ -320,22 +329,22 @@ public class Shuffle : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        clones.Clear();
-        foreach (Map map in gamemap.allmaps)
+        //clones.Clear();
+        gamemap = GetComponent<MapLoader>();
+        Debug.Log(gamemap.GameLevel.allmaps.Count);
+
+        foreach (Map m in gamemap.GameLevel.allmaps)
         {
-            Debug.Log("Shuffle is executed...");
-            //CopyMap(map);
-            
-            clones.Add(CopyMap(map));
-            
+            ClearLists(m);
+            SetAllEntrances(m);
+           // AlignRooms(m);
+            GetRoomLayout(m);
+            ClearRoomLayout(m);
         }
-        foreach (Map cl in clones)
+        foreach (Map cl in gamemap.GameLevel.allmaps)
         {
-            ClearLists(cl);
-            SetAllEntrances(cl);
-            AlignRooms(cl);
-            GetRoomLayout(cl);
-            ClearRoomLayout(cl);
+            Debug.Log(cl.rooms.Count);
+            
             SetAllEntrances(cl);
             Selection(cl.rooms);
             SetAllEntrances(cl);

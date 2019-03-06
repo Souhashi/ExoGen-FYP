@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
-[CreateAssetMenu]
-public class Room : ScriptableObject
+
+public class Room 
 {
 
     public Vector3Int position;
@@ -34,7 +34,21 @@ public class Room : ScriptableObject
     public List<int> lengths;
     public bool[] isexit;
     public bool isHub;
-    public int identifier;
+    public Room(Vector3Int pos, Vector3Int a, int w, int h, int type, int eo, int el, bool fE, bool hS)
+    {
+        position = pos;
+        anchor = a;
+        width = w;
+        height = h;
+        Type = (type)type;
+        entranceoffset = eo;
+        entrancelength = el;
+        flipE = fE;
+        hasStairs = hS;
+        isHub = false;
+    }
+
+
     public Vector3Int getexit()
     {
         return exit;
@@ -88,10 +102,12 @@ public class Room : ScriptableObject
         offset.Clear();
         tiletransform.Clear();
         tileposition.Clear();
-        stairtiles.Clear();
-        stairoffset.Clear();
-        stairtransform.Clear();
-        stairposition.Clear();
+        if (stairtiles != null) { stairtiles.Clear(); }
+        if (stairoffset != null) { stairoffset.Clear(); }
+        if (stairtransform != null) { stairtransform.Clear(); }
+        if (stairposition != null) { stairposition.Clear(); }
+       
+      
     }
 
     public bool Contains(Room room)

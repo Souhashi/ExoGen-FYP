@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-D:/Documents/TestGame/ExoGen.exe
+C:/Users/SOUHASHI/Documents/TestBuild/ExoGen.exe
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
 SceneListEnd?
@@ -23,7 +23,6 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 22928088f519404a35a28eeefb31fb4b Assembly-CSharp.dll:Cinemachine.CinemachineFollowZoom
 7f611a985a1f7b423a248ee13074418e Assembly-CSharp.dll:.Rotate
 f6637497451c9a030c421de4a1ad5cdb Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
-32cd6ed9ba7b923c3cf90a420ff684e4 Assembly-CSharp.dll:.Map
 b14b4630cc47b6e9ea8a644551a6a8cc Unity.TextMeshPro.dll:TMPro.TMP_Text
 53cefe5d98cadefbab750835e70b89c0 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 486cd95c82d8305219c352c06b776e1f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -103,7 +102,6 @@ c7dd12c15208b0447e101f80038706df UnityEngine.Timeline.dll:UnityEngine.Timeline.A
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 0ddb2c46096a1e59e0dce07886ce4769 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 64f3a13c1277a7f1324321d93d0ec13b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-d80f2cf717b4bf163c239908c3512500 Assembly-CSharp.dll:.Room
 66b3109aa5921cf800bec17926c6adba Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 486cd95c82d8305219c352c06b776e1f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -149,7 +147,6 @@ e6c761d7a73250006fd9d0ad3cc1f4a2 Assembly-CSharp.dll:.PlaceObjects
 eaf0bcdb10d442a4029d615f41d09957 Unity.TextMeshPro.dll:TMPro.TextContainer
 72dc7605e6ad611888137faefa2ae1f8 Assembly-CSharp.dll:Cinemachine.CinemachineTargetGroup
 d58ce68b7bf4df22223706b3c429f669 Assembly-CSharp.dll:.PlayerPlatformerController
-d80f2cf717b4bf163c239908c3512500 Assembly-CSharp.dll:.HubRoom
 dcdd8c81d8e69bd829d2d7bb309c8ba1 Assembly-CSharp.dll:Cinemachine.CinemachineTransposer
 201273fb4f889724fb090164b7d6c657 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 486cd95c82d8305219c352c06b776e1f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -173,7 +170,7 @@ d67a252df13ba25052edc715f4c3605f Assembly-CSharp.dll:Cinemachine.CinemachineMixi
 1aff9b1e016684c3cba68a3fa5d75a59 Assembly-CSharp.dll:.GemCollectedAudioModifier
 e53cc67d84060d628c7f03fc725766d8 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 60c24672f752e597ba61f2e9197ca323 Assembly-CSharp.dll:Cinemachine.Timeline.CinemachineShot
-9ac385c60e04cf543f0314eea9c469aa Assembly-CSharp.dll:.GameMap
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.MapLoader
 392c5b921098bd4c139d9146d0efa6d7 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 3ef13178210efdcf6a9d57780d65303d Assembly-CSharp.dll:Cinemachine.CinemachineConfiner
 486cd95c82d8305219c352c06b776e1f UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
@@ -196,15 +193,15 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 98d69a140ec0084cde3b6a5e09aea295 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
-938402b762935e2d4fb8efa60261bb9d Assembly-CSharp.dll:UnityEditor.BoxBrush
+0d54fe21a195406e76ab8f1b3731ff5f Assembly-CSharp.dll:UnityEditor.BoxBrush
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 3440e114848660940aab66a2e380929b Assembly-CSharp.dll:Cinemachine.CinemachineSmoothPath
-a297d9ab907a7bc6f952394701de05d9 Assembly-CSharp.dll:.UseGenerator
-97c2bba6651c7197cc674da91b3b4719 Assembly-CSharp.dll:.CreateBackground
+33016da9e1251a5102f86128903adb23 Assembly-CSharp.dll:.UseGenerator
+33016da9e1251a5102f86128903adb23 Assembly-CSharp.dll:.CreateBackground
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Cinemachine.CinemachineHardLookAt
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 ae5db04f3b03d62513461c39ee57d66a Assembly-CSharp.dll:.RoomPallete
-82037dc94511be19551c8924220f88e5 Assembly-CSharp.dll:.Shuffle
+3bc8525dbe889ac5dd4a85ed4cfe0c7e Assembly-CSharp.dll:.Shuffle
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
