@@ -26832,7 +26832,7 @@ MonoBehaviour:
   walls: {fileID: 650454234}
   shuffle: {fileID: 0}
   tile: {fileID: 11400000, guid: 01e7640e99ab342d2bee5b21a7d87ece, type: 2}
-  CollectableGem: {fileID: 1764816090862790, guid: 75cabef8c622f42229b80fec978c6a10,
+  CollectableGem: {fileID: 1059971210099584, guid: f549817f353c6234d8cdf2ad5388ca98,
     type: 2}
 --- !u!114 &650454240
 MonoBehaviour:
@@ -67426,6 +67426,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectableGem: {fileID: 1764816090862790, guid: 75cabef8c622f42229b80fec978c6a10,
     type: 2}
+--- !u!1001 &1474578027
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 47.27562
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802340165908314, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059971210099584, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f549817f353c6234d8cdf2ad5388ca98, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1582423501
 GameObject:
   m_ObjectHideFlags: 0
