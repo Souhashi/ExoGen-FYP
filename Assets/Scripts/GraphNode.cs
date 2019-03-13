@@ -27,12 +27,7 @@ public class GraphNode  {
     {
        // bool isValid = false;
         position = new Vector3Int(room.position.x+2, room.position.y+2, 0);
-        foreach (Vector3Int p in room.GetPosition())
-        {
-            if (position == p) {
-               // position = new Vector3Int(Random.Range(room.position.x + 2, room.position.x + room.width - 1), Random.Range(room.position.y + 2, room.position.y + room.height - 1), 0);
-            }
-        }
+      
         Debug.Log("RPos: " + room.position.x + ", " + room.position.y);      
         Debug.Log("Pos: " + position.x + ", " + position.y);
         return position;

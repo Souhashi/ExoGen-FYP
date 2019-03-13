@@ -46,6 +46,14 @@ public class MapLoader : MonoBehaviour
 
     }
 
+    public List<bool> ParseBoolList(string s)
+    {
+        List<bool> b = new List<bool>();
+        string[] t = s.Split(' ');
+        for (int i = 0; i < t.Length; i++) { b.Add(bool.Parse(t[i])); }
+        return b;
+    }
+
     public bool ToBoolean(string f)
     {
         return Boolean.Parse(f);
@@ -73,12 +81,12 @@ public class MapLoader : MonoBehaviour
             if (rinfo[0] == "R")
             {
                 newmap.rooms.Add(new Room(ToVector3(rinfo[1]), ToVector3(rinfo[2]), ToInt(rinfo[3]), ToInt(rinfo[4]), ToInt(rinfo[5]), 
-                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToBoolean(rinfo[8]), ToBoolean(rinfo[9])));
+                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToBoolean(rinfo[8]), ParseBoolList(rinfo[9])));
             }
             if (rinfo[0] == "HR")
             {
                 newmap.rooms.Add(new HubRoom(ToVector3(rinfo[1]), ToVector3(rinfo[2]), ToInt(rinfo[3]), ToInt(rinfo[4]), ToInt(rinfo[5]),
-                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToBoolean(rinfo[8]), ToBoolean(rinfo[9]), ParseInts(rinfo[10]), ParseInts(rinfo[11]), ParseBoolean(rinfo[12])));
+                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToBoolean(rinfo[8]), ParseBoolList(rinfo[9]), ParseInts(rinfo[10]), ParseInts(rinfo[11]), ParseBoolean(rinfo[12])));
 
             }
          }

@@ -1,6 +1,6 @@
 0,2,0,true,false
-R,0 0 0,0 0 0,10,15,1,2,2,false,false
-R,0 0 0,0 0 0,15,10,1,2,2,false,false
-R,0 0 0,0 0 0,20,20,1,2,2,false,false
-R,0 0 0,0 0 0,10,10,1,2,2,false,false
-R,0 0 0,0 0 0,30,30,6,2,2,true,false
+R,0 0 0,0 0 0,10,15,1,2,2,false,true false false
+R,0 0 0,0 0 0,15,10,1,2,2,false,true false false
+R,0 0 0,0 0 0,20,20,1,2,2,false,true false false
+R,0 0 0,0 0 0,10,10,1,2,2,false,true false false
+R,0 0 0,0 0 0,30,30,6,2,2,true,true false false

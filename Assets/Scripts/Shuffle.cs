@@ -8,10 +8,9 @@ public class Shuffle : MonoBehaviour
     //We need to make this better!
     public Map map;
     private Room room1, room2;
-    public Tilemap stairs;
-    public Tilemap tilemap;
-    public Tilemap layout;
+   
     public MapLoader gamemap;
+    public List<Tilemap> tilemaps;
     List<Map> clones = new List<Map>();
     Map clone;
     
@@ -24,7 +23,7 @@ public class Shuffle : MonoBehaviour
     {
         foreach (Room r in m.rooms)
         {
-            r.ClearLists();
+           r.ClearLists();
         }
             
     }
@@ -33,68 +32,47 @@ public class Shuffle : MonoBehaviour
         return clones;
     }
 
-   /* Map CopyMap(Map m)
-    {
-        clone = null;
-        clone = Object.Instantiate(m) as Map;
-        Room t;
-        clone.rooms.Clear();
-        foreach (Room r in m.rooms)
-        {
-            t = Object.Instantiate(r) as Room;
-            clone.rooms.Add(t);
-        }
-        return clone;
-        
-    }*/
+  
 
     public Map GetClone() { return clone; }
 
     void GetCoords(Room r)
     {
         Debug.Log("A"+r.anchor.ToString()+r.width+", "+r.height);
-        r.GetPosition().Clear();
+        
         Vector3Int position, stairposition;
-        if (r.hasStairs)
-        {
-            r.InitialiseLists();
-        }
+       
         if (r.anchor != Vector3Int.zero)
         {
-
-            for (int x = r.anchor.x; x <= r.anchor.x + r.width - 1; x++)
-            {
-                for (int y = r.anchor.y; y <= r.anchor.y + r.height - 1; y++)
-                {
-                    position = new Vector3Int(x, y, 0);
-                    stairposition = new Vector3Int(x, y, 0);
-                    if (layout.HasTile(position))
+            for (int i = 0; i < r.tilemaps.Count; i++) {
+                Debug.Log(r.tilemaps[i]);
+                if (r.tilemaps[i]) {
+                    for (int x = r.anchor.x; x <= r.anchor.x + r.width - 1; x++)
                     {
-                        r.GetPosition().Add(position);
-                        r.GetTiles().Add(layout.GetTile(position));
-                        r.GetTransform().Add(layout.GetTransformMatrix(position));
-                        r.GetOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
-
-
-                    }
-                    if (r.hasStairs)
-                    {
-
-                        if (stairs.HasTile(stairposition))
+                        for (int y = r.anchor.y; y <= r.anchor.y + r.height - 1; y++)
                         {
-                            r.GetStairPosition().Add(stairposition);
-                            r.GetStairTiles().Add(stairs.GetTile(stairposition));
-                            r.GetStairTransform().Add(stairs.GetTransformMatrix(stairposition));
-                            r.GetStairOffset().Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
+                            position = new Vector3Int(x, y, 0);
+                            stairposition = new Vector3Int(x, y, 0);
+                            if (tilemaps[i].HasTile(position))
+                            {
+                                r.templateinfo[i].tiles.Add(tilemaps[i].GetTile(position));
+                                r.templateinfo[i].tileposition.Add(position);
+                                r.templateinfo[i].tiletransform.Add(tilemaps[i].GetTransformMatrix(position));
+                                r.templateinfo[i].offset.Add(new Vector3Int(x - r.anchor.x, y - r.anchor.y, 0));
+
+                            }
+
                         }
 
                     }
+
                 }
 
             }
+               
         }
 
-        Debug.Log("Tiles loaded: "+r.GetPosition().Count);
+     
        // Debug.Log("Stair tiles loaded: " + r.GetStairPosition().Count);
      
     }
@@ -102,22 +80,30 @@ public class Shuffle : MonoBehaviour
 
     void ClearRoom(Room r)
     {
-        Vector3Int position, stairposition;
-        for (int x = r.anchor.x; x < r.anchor.x + r.width; x++)
+        for (int i = 0; i < r.tilemaps.Count; i++)
         {
-            for (int y = r.anchor.y; y < r.anchor.y + r.height; y++)
+
+            if (r.tilemaps[i])
             {
-                position = new Vector3Int(x, y, 0);
-                stairposition = new Vector3Int(x, y, 0);
-               
-                
-                    layout.SetTile(position, null);
-                    stairs.SetTile(stairposition, null);
-                
+                Vector3Int position;
+                for (int x = r.anchor.x; x < r.anchor.x + r.width; x++)
+                {
+                    for (int y = r.anchor.y; y < r.anchor.y + r.height; y++)
+                    {
+                        position = new Vector3Int(x, y, 0);
+                        
 
+
+                        tilemaps[i].SetTile(position, null);
+                        
+
+
+                    }
+
+                }
             }
-
         }
+               
 
     }
 
@@ -148,44 +134,24 @@ public class Shuffle : MonoBehaviour
     
 
    
-    void NewCoords(Room r, Room r1)
-    {
-        for (int i = 0; i < r.GetPosition().Count; i++)
-        {
-            layout.SetTile(new Vector3Int(r1.position.x + r.GetOffset()[i].x, r1.position.y + r.GetOffset()[i].y, 0), r.GetTiles()[i]);
-            layout.SetTransformMatrix(new Vector3Int(r1.position.x + r.GetOffset()[i].x, r1.position.y + r.GetOffset()[i].y, 0), r.GetTransform()[i]);
-        }
-        if (r.hasStairs)
-        {
-            for (int j = 0; j < r.GetStairPosition().Count; j++)
-            {
-                stairs.SetTile(new Vector3Int(r1.position.x + r.GetStairOffset()[j].x, r1.position.y + r.GetStairOffset()[j].y, 0), r.GetStairTiles()[j]);
-                stairs.SetTransformMatrix(new Vector3Int(r1.position.x + r.GetStairOffset()[j].x, r1.position.y + r.GetStairOffset()[j].y, 0), r.GetStairTransform()[j]);
-
-            }
-
-        }
-
-    }
+   
 
     void Replace(Room r)
     {
-        Debug.Log("!Position: " + r.position.x + ", " + r.position.y);
-        for (int i = 0; i < r.GetPosition().Count; i++)
+        for (int i = 0; i < r.tilemaps.Count; i++)
         {
-            layout.SetTile(new Vector3Int(r.position.x + r.GetOffset()[i].x, r.position.y + r.GetOffset()[i].y, 0), r.GetTiles()[i]);
-            layout.SetTransformMatrix(new Vector3Int(r.position.x + r.GetOffset()[i].x, r.position.y + r.GetOffset()[i].y, 0), r.GetTransform()[i]);
-        }
-        if (r.hasStairs)
-        {
-            for (int j = 0; j < r.GetStairPosition().Count; j++)
+
+            if (r.tilemaps[i])
             {
-                stairs.SetTile(new Vector3Int(r.position.x + r.GetStairOffset()[j].x, r.position.y + r.GetStairOffset()[j].y, 0), r.GetStairTiles()[j]);
-                stairs.SetTransformMatrix(new Vector3Int(r.position.x + r.GetStairOffset()[j].x, r.position.y + r.GetStairOffset()[j].y, 0), r.GetStairTransform()[j]);
-
+                Debug.Log("!Position: " + r.position.x + ", " + r.position.y);
+                for (int j = 0; j < r.templateinfo[i].tileposition.Count; j++)
+                {
+                    tilemaps[i].SetTile(new Vector3Int(r.position.x + r.templateinfo[i].offset[j].x, r.position.y + r.templateinfo[i].offset[j].y, 0), r.templateinfo[i].tiles[j]);
+                    tilemaps[i].SetTransformMatrix(new Vector3Int(r.position.x + r.templateinfo[i].offset[j].x, r.position.y + r.templateinfo[i].offset[j].y, 0), r.templateinfo[i].tiletransform[j]);
+                }
             }
-
         }
+       
     }
 
     bool CheckType(Room a, Room b) {

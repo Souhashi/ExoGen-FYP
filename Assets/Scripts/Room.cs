@@ -20,21 +20,29 @@ public class Room
     public int entrancelength;
     public bool flipE;
     public bool hasStairs;
-    protected List<TileBase> tiles = new List<TileBase>();
-    protected List<Vector3Int> offset = new List<Vector3Int>();
-    protected List<Matrix4x4> tiletransform = new List<Matrix4x4>();
-    protected List<Vector3Int> tileposition = new List<Vector3Int>();
-    protected List<TileBase> stairtiles;
-    protected List<Vector3Int> stairoffset;
-    protected List<Matrix4x4> stairtransform;
-    protected List<Vector3Int> stairposition;
+    public List<TemplateInfo> templateinfo;
+    public List<bool> tilemaps;
+    public class TemplateInfo
+    {
+        public List<TileBase> tiles;
+        public List<Vector3Int> offset;
+       public List<Matrix4x4> tiletransform;
+        public List<Vector3Int> tileposition;
+
+        public TemplateInfo() {
+            tiles = new List<TileBase>();
+            offset = new List<Vector3Int>();
+            tiletransform = new List<Matrix4x4>();
+            tileposition = new List<Vector3Int>();
+        }
+    }
     protected int numexits;
     protected List<Vector3Int> exits = new List<Vector3Int>();
     public List<int> offsets;
     public List<int> lengths;
     public bool[] isexit;
     public bool isHub;
-    public Room(Vector3Int pos, Vector3Int a, int w, int h, int type, int eo, int el, bool fE, bool hS)
+    public Room(Vector3Int pos, Vector3Int a, int w, int h, int type, int eo, int el, bool fE, List<bool> tilemaps)
     {
         position = pos;
         anchor = a;
@@ -44,10 +52,26 @@ public class Room
         entranceoffset = eo;
         entrancelength = el;
         flipE = fE;
-        hasStairs = hS;
+        templateinfo = new List<TemplateInfo>();
         isHub = false;
+        InitialiseTemplates(tilemaps.Count);
+        this.tilemaps = tilemaps;
     }
 
+    void InitialiseTemplates(int x) {
+        for (int i = 0; i < x; i++) {
+            templateinfo.Add(new TemplateInfo());
+        }
+    }
+
+    public void ClearLists() {
+        for (int i = 0; i < templateinfo.Count; i++) {
+            templateinfo[i].offset.Clear();
+            templateinfo[i].tileposition.Clear();
+            templateinfo[i].tiles.Clear();
+            templateinfo[i].tiletransform.Clear();
+        }
+    }
 
     public Vector3Int getexit()
     {
@@ -60,22 +84,6 @@ public class Room
 
     public Vector3Int getentrance() { return entrance; }
 
-    public List<TileBase> GetTiles() { return tiles; }
-
-    public List<Vector3Int> GetOffset() { return offset; }
-
-    public List<Matrix4x4> GetTransform() { return tiletransform; }
-
-    public List<Vector3Int> GetPosition() { return tileposition; }
-
-    public List<TileBase> GetStairTiles() { return stairtiles; }
-
-    public List<Vector3Int> GetStairOffset() { return stairoffset; }
-
-    public List<Matrix4x4> GetStairTransform() { return stairtransform; }
-
-    public List<Vector3Int> GetStairPosition() { return stairposition; }
-    
     public void SetPosition(Vector3Int newpos)
     {
         position = newpos;
@@ -86,29 +94,9 @@ public class Room
         return position;
     }
 
-    public void InitialiseLists() {
-        if (hasStairs)
-        {
-            stairtiles = new List<TileBase>();
-            stairoffset = new List<Vector3Int>();
-            stairtransform = new List<Matrix4x4>();
-            stairposition = new List<Vector3Int>();
-        }
-    }
+    
 
-    public void ClearLists()
-    {
-        tiles.Clear();
-        offset.Clear();
-        tiletransform.Clear();
-        tileposition.Clear();
-        if (stairtiles != null) { stairtiles.Clear(); }
-        if (stairoffset != null) { stairoffset.Clear(); }
-        if (stairtransform != null) { stairtransform.Clear(); }
-        if (stairposition != null) { stairposition.Clear(); }
-       
-      
-    }
+   
 
     public bool Contains(Room room)
     {

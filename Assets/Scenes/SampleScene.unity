@@ -159,17 +159,17 @@ MonoBehaviour:
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
-  m_ScreenX: 0.49999976
+  m_ScreenX: 0.4999997
   m_ScreenY: 0.49999985
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.34307036
+  m_DeadZoneWidth: 0.09834476
   m_DeadZoneHeight: 0.25048542
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
-  m_BiasX: 0
-  m_BiasY: 0
+  m_SoftZoneWidth: 0.11434561
+  m_SoftZoneHeight: 0.3197132
+  m_BiasX: -0.000005587638
+  m_BiasY: 0.0000012914896
   m_GroupFramingMode: 2
   m_AdjustmentMode: 2
   m_GroupFramingSize: 0.8
@@ -26625,10 +26625,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbbfa1eb9a2dd245972785fe19d4e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stairs: {fileID: 1143756404}
-  tilemap: {fileID: 650454234}
-  layout: {fileID: 753205392}
   gamemap: {fileID: 0}
+  tilemaps:
+  - {fileID: 753205392}
+  - {fileID: 1046962150}
+  - {fileID: 1143756404}
 --- !u!114 &650454232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67356,10 +67357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbbfa1eb9a2dd245972785fe19d4e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stairs: {fileID: 765058874}
-  tilemap: {fileID: 1171563544}
-  layout: {fileID: 2100484446}
   gamemap: {fileID: 0}
+  tilemaps: []
 --- !u!66 &1171563546
 CompositeCollider2D:
   m_ObjectHideFlags: 0
