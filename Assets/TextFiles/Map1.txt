@@ -1,4 +1,4 @@
 0,1,0,false,false
-R,0 0 0,0 0 0,30,10,6,1,2,false,true false false
-R,0 0 0,0 0 0,45,10,1,2,2,false,true false false
-HR,0 0 0,30 -1 0,40,30,1,2,2,false,true false false,2 2 2,2 2 2,false true true
+R,0 0 0,0 0 0,30,10,6,1,2,2,2,false,true false false
+R,0 0 0,0 0 0,45,10,1,2,2,2,2,false,true false false
+HR,0 0 0,30 -1 0,40,30,1,2,2,2,2,false,true false false,2 2 2,2 2 2,false true true

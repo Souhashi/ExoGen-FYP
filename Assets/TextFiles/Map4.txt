@@ -1,2 +1,2 @@
 1,9,0,false,true
-R,0 0 0,0 0 0,15,15,6,2,2,false,true false false
+R,0 0 0,0 0 0,15,15,6,2,2,2,2,false,true false false

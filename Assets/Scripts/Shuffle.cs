@@ -115,13 +115,14 @@ public class Shuffle : MonoBehaviour
         {
             
         r[indexB].SetTranslatePos(r[indexA].getexit().x + 1, r[indexA].getexit().y);
+            r[indexB].entrancelength = r[indexA].exitl;
             
         }
         else if (r[indexA].Type == Room.type.Left || r[indexA].Type == Room.type.TopLeft || r[indexA].Type == Room.type.BottomLeft || (r[indexA].Type == Room.type.DeadEnd && r[indexA].flipE))
         {
            
         r[indexB].SetTranslatePos(r[indexA].getexit().x - 1, r[indexA].getexit().y);
-            
+            r[indexB].entrancelength = r[indexA].exitl;
         }
       
         
@@ -241,6 +242,7 @@ public class Shuffle : MonoBehaviour
                 clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].x + 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
+                clone.rooms[0].entrancelength = gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].lengths[clone.item];
             }
             else if (clone.rooms[0].Type == Room.type.Left || clone.rooms[0].Type == Room.type.TopLeft || clone.rooms[0].Type == Room.type.BottomLeft)
             {
@@ -248,6 +250,7 @@ public class Shuffle : MonoBehaviour
                 clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].x - 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexits()[clone.exit].y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
+                clone.rooms[0].entrancelength = gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].lengths[clone.item];
             }
         }
         else if (clone.isRoute == true && clone.isHubAdjacent == false)
@@ -258,6 +261,7 @@ public class Shuffle : MonoBehaviour
                 clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().x + 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
+                clone.rooms[0].entrancelength = gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].exitl;
             }
             else if (clone.rooms[0].Type == Room.type.Left || clone.rooms[0].Type == Room.type.TopLeft || clone.rooms[0].Type == Room.type.BottomLeft|| 
                 (clone.rooms[0].Type == Room.type.DeadEnd && clone.rooms[0].flipE == false))
@@ -265,6 +269,7 @@ public class Shuffle : MonoBehaviour
                 clone.rooms[0].SetTranslatePos(gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().x - 1, gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].getexit().y);
                 clone.rooms[0].SetEntrance();
                 clone.rooms[0].SetExit();
+                clone.rooms[0].entrancelength = gamemap.GameLevel.allmaps[clone.map].rooms[clone.item].exitl;
             }
         }
         for (int i = 0; i < clone.rooms.Count; i++)

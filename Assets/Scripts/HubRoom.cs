@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class HubRoom : Room {
 
-    public HubRoom(Vector3Int pos, Vector3Int a, int w, int h, int type, int eo, int el, bool fE, List<bool> tilemaps, List<int> off, List<int> lengths, bool[] bools) 
-        : base(pos, a, w, h, type, eo, el, fE, tilemaps)
+    public HubRoom(Vector3Int pos, Vector3Int a, int w, int h, int type, int eo, int el, int exo, int exl, bool fE, List<bool> tilemaps, List<int> off, List<int> lengths, bool[] bools) 
+        : base(pos, a, w, h, type, eo, el, exo, exl, fE, tilemaps)
     {
         offsets = off;
         this.lengths = lengths;

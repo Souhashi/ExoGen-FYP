@@ -1,11 +1,11 @@
 0,2,1,true,false
-R,0 0 0,70 -1 0,15,10,1,2,2,false,true false false
-R,0 0 0,85 -1 0,10,12,1,2,2,false,true false false
-R,0 0 0,0 0 0,15,11,1,2,2,false,true false false
-R,0 0 0,0 0 0,30,12,1,2,2,false,true false false
-R,0 0 0,95 -1 0,15,20,5,2,2,false,true false false
-R,0 0 0,0 0 0,10,12,1,2,2,false,true false false
-R,0 0 0,160 -2 0,15,30,4,2,2,true,true false false
-R,0 0 0,0 0 0,10,10,0,2,2,false,true false false
-R,0 0 0,0 0 0,20,10,0,2,2,false,true false false
-R,0 0 0,0 0 0,20,14,0,2,2,false,true false false
+R,0 0 0,70 -1 0,15,10,1,2,2,2,2,false,true false false
+R,0 0 0,85 -1 0,10,12,1,2,2,2,2,false,true false false
+R,0 0 0,0 0 0,15,11,1,2,2,2,2,false,true false false
+R,0 0 0,0 0 0,30,12,1,2,2,2,2,false,true false false
+R,0 0 0,95 -1 0,15,20,5,2,2,2,2,false,true false false
+R,0 0 0,0 0 0,10,12,1,2,2,2,2,false,true false false
+R,0 0 0,160 -2 0,15,30,4,2,2,2,2,true,true false false
+R,0 0 0,0 0 0,10,10,0,2,2,2,2,false,true false false
+R,0 0 0,0 0 0,20,10,0,2,2,2,3,false,true false false
+R,0 0 0,0 0 0,20,14,0,2,2,2,2,false,true false false

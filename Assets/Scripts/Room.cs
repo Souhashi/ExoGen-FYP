@@ -17,7 +17,7 @@ public class Room
     public type Type;
     public enum type { Left, Right, TopLeft, TopRight, BottomLeft, BottomRight, DeadEnd};
     public int entranceoffset;
-    public int entrancelength;
+    public int entrancelength, exitof, exitl;
     public bool flipE;
     public bool hasStairs;
     public List<TemplateInfo> templateinfo;
@@ -42,7 +42,7 @@ public class Room
     public List<int> lengths;
     public bool[] isexit;
     public bool isHub;
-    public Room(Vector3Int pos, Vector3Int a, int w, int h, int type, int eo, int el, bool fE, List<bool> tilemaps)
+    public Room(Vector3Int pos, Vector3Int a, int w, int h, int type, int eo, int el, int exo, int exl, bool fE, List<bool> tilemaps)
     {
         position = pos;
         anchor = a;
@@ -51,6 +51,8 @@ public class Room
         Type = (type)type;
         entranceoffset = eo;
         entrancelength = el;
+        exitof = exo;
+        exitl = exl;
         flipE = fE;
         templateinfo = new List<TemplateInfo>();
         isHub = false;
@@ -193,32 +195,32 @@ public class Room
         {
             case type.Right:
                 {
-                    exit = new Vector3Int(position.x + width - 1, position.y + entranceoffset - 1, 0);
+                    exit = new Vector3Int(position.x + width - 1, position.y + exitof - 1, 0);
                     break;
                 }
             case type.Left:
                 {
-                    exit = new Vector3Int(position.x, position.y + entranceoffset - 1, 0);
+                    exit = new Vector3Int(position.x, position.y + exitof - 1, 0);
                     break;
                 }
             case type.TopRight:
                 {
-                    exit = new Vector3Int(position.x + width - 1, position.y + height - 1 - entrancelength - entranceoffset, 0);
+                    exit = new Vector3Int(position.x + width - 1, position.y + height - 1 - exitl - exitof, 0);
                     break;
                 }
             case type.TopLeft:
                 {
-                    exit = new Vector3Int(position.x, position.y + height - 1 - entrancelength - entranceoffset, 0);
+                    exit = new Vector3Int(position.x, position.y + height - 1 - exitl - exitof, 0);
                     break;
                 }
             case type.BottomRight:
                 {
-                    exit = new Vector3Int(position.x + width - 1, position.y + entranceoffset - 1, 0);
+                    exit = new Vector3Int(position.x + width - 1, position.y + exitof - 1, 0);
                     break;
                 }
             case type.BottomLeft:
                 {
-                    exit = new Vector3Int(position.x, position.y + entranceoffset - 1, 0);
+                    exit = new Vector3Int(position.x, position.y + exitof - 1, 0);
                     break;
                 }
             case type.DeadEnd:

@@ -111,31 +111,44 @@ public class CreateRoom : MonoBehaviour
                 {
                     entrance = r.position.y + r.entranceoffset;
                     length = r.position.y + r.entranceoffset + r.entrancelength;
-
-                    //r.SetEntrance();
-                    //r.SetExit();
+                    ex = r.position.y + r.exitof;
+                    exlength = r.position.y + r.exitof + r.exitl;
 
                     for (int i = entrance; i < length; i++)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
-                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
+                        
+                    }
+
+                    for (int j = ex; j < exlength; j++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, j, 0), null);
                     }
 
 
-                    // r.SetExit(r.position.x + r.width, entrance - 1);
 
 
                     currentTilemap.SetTile(new Vector3Int(r.position.x, length, 0), rp.entrancet);
-                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, length, 0), rp.exitT);
+                    currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, exlength, 0), rp.exitT);
                     if (r.entranceoffset == 1)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x, entrance - 1, 0), rp.surface);
-                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, entrance - 1, 0), rp.surface);
+                        
                     }
                     else
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x, entrance - 1, 0), rp.entranceb);
-                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, entrance - 1, 0), rp.exitb);
+                        
+                    }
+
+                    if (r.exitof == 1)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, ex - 1, 0), rp.surface);
+
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, ex - 1, 0), rp.exitb);
                     }
 
 
@@ -148,24 +161,39 @@ public class CreateRoom : MonoBehaviour
 
                     entrance = r.position.y + r.entranceoffset;
                     length = r.position.y + r.entrancelength + r.entranceoffset;
-                   // r.SetEntrance();
-                    //r.SetExit();
+                    ex = r.position.y + r.exitof;
+                    exlength = r.position.y + r.exitof + r.exitl;
+
                     for (int i = entrance; i < length; i++)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
-                        currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
+                       
                     }
-                    currentTilemap.SetTile(new Vector3Int(r.position.x, length, 0), rp.entrancet);
+                    for (int j = ex; j < exlength; j++)
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, j, 0), null);
+                    }
+                    currentTilemap.SetTile(new Vector3Int(r.position.x, exlength, 0), rp.entrancet);
                     currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, length, 0), rp.exitT);
                     if (r.entranceoffset == 1)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, entrance - 1, 0), rp.surface);
-                        currentTilemap.SetTile(new Vector3Int(r.position.x, entrance - 1, 0), rp.surface);
+                       
                     }
                     else
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, entrance - 1, 0), rp.exitb);
-                        currentTilemap.SetTile(new Vector3Int(r.position.x, entrance - 1, 0), rp.entranceb);
+                        
+                    }
+
+                    if (r.exitof == 1)
+                    {
+
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, ex - 1, 0), rp.surface);
+                    }
+                    else
+                    {
+                        currentTilemap.SetTile(new Vector3Int(r.position.x, ex - 1, 0), rp.entranceb);
                     }
                     break;
                 }
@@ -174,15 +202,15 @@ public class CreateRoom : MonoBehaviour
 
                     entrance = r.position.y + r.entranceoffset;
                     length = r.position.y + r.entranceoffset + r.entrancelength;
-                    ex = r.position.y + r.height - 1 - r.entranceoffset;
-                    exlength = r.position.y + r.height - 1 - r.entranceoffset - r.entrancelength;
+                    ex = r.position.y + r.height - 1 - r.exitof;
+                    exlength = r.position.y + r.height - 1 - r.exitof - r.exitl;
                    // r.SetEntrance();
                    // r.SetExit();
                     for (int i = ex; i > exlength; i--)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, i, 0), null);
                     }
-                    if (r.entranceoffset == 1)
+                    if (r.exitof == 1)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, ex - 2, 0), rp.exitb);
                         currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, r.position.y + r.height - 1, 0), rp.ceiling);
@@ -245,15 +273,15 @@ public class CreateRoom : MonoBehaviour
                 {
                     entrance = r.position.y + r.entranceoffset;
                     length = r.position.y + r.entranceoffset + r.entrancelength;
-                    ex = r.position.y + r.height - 1 - r.entranceoffset;
-                    exlength = r.position.y + r.height - 1 - r.entranceoffset - r.entrancelength;
+                    ex = r.position.y + r.height - 1 - r.exitof;
+                    exlength = r.position.y + r.height - 1 - r.exitof - r.exitl;
                    // r.SetEntrance();
                    // r.SetExit();
                     for (int i = ex; i > exlength; i--)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x, i, 0), null);
                     }
-                    if (r.entranceoffset == 1)
+                    if (r.exitof == 1)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x, ex - 2, 0), rp.entranceb);
                         currentTilemap.SetTile(new Vector3Int(r.position.x, r.position.y + r.height - 1, 0), rp.ceiling);
@@ -315,8 +343,8 @@ public class CreateRoom : MonoBehaviour
                 }
             case Room.type.BottomRight:
                 {
-                    entrance = r.position.y + r.entranceoffset;
-                    length = r.position.y + r.entranceoffset + r.entrancelength;
+                    entrance = r.position.y + r.exitof;
+                    length = r.position.y + r.exitof + r.exitl;
                     ex = r.position.y + r.height - 1 - r.entranceoffset;
                     exlength = r.position.y + r.height - 1 - r.entranceoffset - r.entrancelength;
                    // r.SetEntrance();
@@ -327,7 +355,7 @@ public class CreateRoom : MonoBehaviour
 
                     }
                     currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, length, 0), rp.exitT);
-                    if (r.entranceoffset == 1)
+                    if (r.exitof == 1)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x + r.width - 1, entrance - 1, 0), rp.surface);
 
@@ -380,8 +408,8 @@ public class CreateRoom : MonoBehaviour
                 }
             case Room.type.BottomLeft:
                 {
-                    entrance = r.position.y + r.entranceoffset;
-                    length = r.position.y + r.entranceoffset + r.entrancelength;
+                    entrance = r.position.y + r.exitof;
+                    length = r.position.y + r.exitof + r.exitl;
                     ex = r.position.y + r.height - 1 - r.entranceoffset;
                     exlength = r.position.y + r.height - 1 - r.entranceoffset - r.entrancelength;
                   //  r.SetEntrance();
@@ -392,7 +420,7 @@ public class CreateRoom : MonoBehaviour
 
                     }
                     currentTilemap.SetTile(new Vector3Int(r.position.x, length, 0), rp.entrancet);
-                    if (r.entranceoffset == 1)
+                    if (r.exitof == 1)
                     {
                         currentTilemap.SetTile(new Vector3Int(r.position.x, entrance - 1, 0), rp.surface);
 

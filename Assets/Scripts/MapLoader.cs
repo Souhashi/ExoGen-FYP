@@ -81,12 +81,12 @@ public class MapLoader : MonoBehaviour
             if (rinfo[0] == "R")
             {
                 newmap.rooms.Add(new Room(ToVector3(rinfo[1]), ToVector3(rinfo[2]), ToInt(rinfo[3]), ToInt(rinfo[4]), ToInt(rinfo[5]), 
-                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToBoolean(rinfo[8]), ParseBoolList(rinfo[9])));
+                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToInt(rinfo[8]), ToInt(rinfo[9]), ToBoolean(rinfo[10]), ParseBoolList(rinfo[11])));
             }
             if (rinfo[0] == "HR")
             {
                 newmap.rooms.Add(new HubRoom(ToVector3(rinfo[1]), ToVector3(rinfo[2]), ToInt(rinfo[3]), ToInt(rinfo[4]), ToInt(rinfo[5]),
-                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToBoolean(rinfo[8]), ParseBoolList(rinfo[9]), ParseInts(rinfo[10]), ParseInts(rinfo[11]), ParseBoolean(rinfo[12])));
+                    ToInt(rinfo[6]), ToInt(rinfo[7]), ToInt(rinfo[8]), ToInt(rinfo[9]), ToBoolean(rinfo[10]), ParseBoolList(rinfo[11]), ParseInts(rinfo[12]), ParseInts(rinfo[13]), ParseBoolean(rinfo[14])));
 
             }
          }
