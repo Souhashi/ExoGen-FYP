@@ -18,7 +18,7 @@ public class PlaceObjects : MonoBehaviour {
     {
        active.Clear();
         map = GetComponent<Shuffle>();
-        for (int i = 0; i < map.gamemap.GameLevel.allmaps.Count; i++)
+        for (int i = 1; i < map.gamemap.GameLevel.allmaps.Count-1; i++)
         {
             for (int j = 0; j < map.gamemap.GameLevel.allmaps[i].rooms.Count; j++)
             {

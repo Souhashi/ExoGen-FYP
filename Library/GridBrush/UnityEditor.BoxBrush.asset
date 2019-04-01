@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -35,6 +36,5 @@ MonoBehaviour:
   m_Pivot: {x: 0, y: 0, z: 0}
   boxpos: {x: 115, y: 22, z: 0}
   isActive: 0
-  width: 21
-  height: 14
-  r: {fileID: 11400000, guid: f44510a191e87c14bae1763f777b3a77, type: 2}
+  width: 5
+  height: 5
